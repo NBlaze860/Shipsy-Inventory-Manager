@@ -28,3 +28,14 @@
     *   `GET /api/analytics`: A placeholder endpoint for future analytics features.
 
 **Reasoning:** This RESTful API design is intuitive and follows standard conventions. It provides a clear and consistent way for client applications to interact with the backend. The separation of resources makes the API easy to understand and extend.
+
+## Database Schema Design
+
+**Context:** The application requires a robust data model to handle user management and product inventory. The schema needs to support user authentication, role-based access control, and comprehensive product management.
+
+**Decision:** Two primary Mongoose models will be implemented with clean, minimal validation:
+
+*   **User Model:** Contains essential user authentication data with role-based access control (admin/user roles)
+*   **Product Model:** Contains core product information with automatic value calculations and user references
+
+**Reasoning:** This design prioritizes simplicity and maintainability while providing essential functionality. The models use ES6 import/export syntax with minimal but effective validation. The User model supports authentication and authorization needs, while the Product model includes pre-save middleware for automatic total value calculations.

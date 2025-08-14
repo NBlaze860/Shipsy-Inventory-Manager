@@ -1,29 +1,39 @@
-## Current Prompt
-Fill in each route file using Express Router, mapping them to the correct controller functions as follows:
+YOU MUST NOT TAKE ANY ACTION FOR GIT OR GITHUB.
 
-Authentication Endpoints (routes/auth.js)
-- POST /api/auth/register → registerUser
-- POST /api/auth/login → loginUser
-- GET /api/auth/profile → getUserProfile
+Create two Mongoose model files in the `models` folder (folder already exists).  
+Keep the code simple, clean, and professional, with self-explanatory comments.  
 
-Product Endpoints (routes/products.js)
-- GET /api/products → getProducts
-- GET /api/products/:id → getProductById
-- POST /api/products → createProduct
-- PUT /api/products/:id → updateProduct
-- DELETE /api/products/:id → deleteProduct
+1. **User Model** (`models/User.js`):
+{
+  _id: ObjectId,
+  username: String (unique, required),
+  email: String (unique, required),
+  password: String (hashed),
+  role: Enum ['admin', 'user'],
+  createdAt: Date
+}
 
-Analytics Endpoints (routes/analytics.js)
-- Leave empty except for a placeholder GET route and explanatory comment.
+2. **Product Model** (`models/Product.js`):
+{
+  _id: ObjectId,
+  name: String (required), // Text field
+  description: String,
+  category: Enum ['electronics', 'clothing', 'food', 'books', 'other'], // Enum field
+  quantity: Number (required),
+  unitPrice: Number (required),
+  isActive: Boolean (default: true), // Boolean field
+  totalValue: Number (calculated: quantity * unitPrice), // Calculated field
+  createdBy: ObjectId (ref: User),
+  createdAt: Date,
+  updatedAt: Date
+}
 
-In each controller file, export functions for the above routes with placeholder implementations:
-Example:
-```js
-
-export const registerUser = (req, res) => {
-  // Register a new user
-};
-
+**Requirements:**
+- Use Mongoose syntax.
+- Add appropriate validation and schema options (`timestamps` where relevant).
+- Include a pre-save middleware in the Product model to calculate `totalValue`.
+- Export each model with `module.exports`.
+- Write concise, clear, and professional comments above fields and middleware explaining their purpose.
 
 Now follow the below prompts.
 ---
