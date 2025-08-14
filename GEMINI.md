@@ -1,39 +1,31 @@
+You have access to the following files in my project: ProductService.js, ProductModel.js, and productController.js.
+
+Step 1: Carefully read and analyze these files to fully understand:
+- How the "create product" method was implemented in ProductService.js
+- How the "create product" controller was implemented in productController.js
+- How the ProductModel.js schema works
+- Any patterns, coding style, comments, naming conventions, error handling, and data validation approaches used.
+
+Step 2: Identify all other controllers in productController.js that currently have placeholders (no real implementation).
+
+Step 3: For each placeholder controller:
+- Implement it following the exact same style, cleanliness, professional quality, and organization as the existing "create product" controller.
+- Implement their corresponding service methods in ProductService.js, following the same style, comments, and professional quality as the "create product" method.
+- If any additional properties or methods are needed in the ProductModel.js to support these features, add them with clear documentation.
+
+Step 4: Ensure:
+- Code is fully functional and free from syntax errors.
+- Variable naming is consistent and descriptive.
+- Comments are clear, concise, and meaningful.
+- All business logic resides in the service layer, not the controller.
+- Controllers handle request/response and call the correct service methods.
+- Proper error handling is implemented exactly as in "create product".
+- Follow best practices for asynchronous code with async/await.
+
+Output:
+- The full updated code for ProductService.js and productController.js with all placeholder controllers replaced by complete, professional implementations.
+
 YOU MUST NOT TAKE ANY ACTION FOR GIT OR GITHUB.
-
-Create two Mongoose model files in the `models` folder (folder already exists).  
-Keep the code simple, clean, and professional, with self-explanatory comments.  
-
-1. **User Model** (`models/User.js`):
-{
-  _id: ObjectId,
-  username: String (unique, required),
-  email: String (unique, required),
-  password: String (hashed),
-  role: Enum ['admin', 'user'],
-  createdAt: Date
-}
-
-2. **Product Model** (`models/Product.js`):
-{
-  _id: ObjectId,
-  name: String (required), // Text field
-  description: String,
-  category: Enum ['electronics', 'clothing', 'food', 'books', 'other'], // Enum field
-  quantity: Number (required),
-  unitPrice: Number (required),
-  isActive: Boolean (default: true), // Boolean field
-  totalValue: Number (calculated: quantity * unitPrice), // Calculated field
-  createdBy: ObjectId (ref: User),
-  createdAt: Date,
-  updatedAt: Date
-}
-
-**Requirements:**
-- Use Mongoose syntax.
-- Add appropriate validation and schema options (`timestamps` where relevant).
-- Include a pre-save middleware in the Product model to calculate `totalValue`.
-- Export each model with `module.exports`.
-- Write concise, clear, and professional comments above fields and middleware explaining their purpose.
 
 Now follow the below prompts.
 ---

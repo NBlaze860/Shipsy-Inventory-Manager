@@ -39,3 +39,24 @@
 *   **Product Model:** Contains core product information with automatic value calculations and user references
 
 **Reasoning:** This design prioritizes simplicity and maintainability while providing essential functionality. The models use ES6 import/export syntax with minimal but effective validation. The User model supports authentication and authorization needs, while the Product model includes pre-save middleware for automatic total value calculations.
+
+## Business Logic Implementation
+
+**Context:** The business logic for creating, reading, updating, and deleting products needs to be implemented. The logic should be separated from the controller layer to maintain a clean architecture.
+
+**Decision:** The business logic for the "create product" feature will be implemented in `ProductService.js`. The `productController.js` will handle the request and response, while the service will handle the core logic of creating a new product.
+
+**Reasoning:** This approach follows the principle of separation of concerns, where the controller is responsible for handling HTTP requests and responses, and the service is responsible for the business logic. This makes the code more modular, testable, and easier to maintain.
+
+## CRUD Operations for Products
+
+**Context:** The initial implementation only included creating products. To provide full inventory management, functionality for reading, updating, and deleting products was required.
+
+**Decision:** The remaining CRUD (Create, Read, Update, Delete) operations for products have been fully implemented. This includes:
+- **Read:** `getProducts` to fetch all products and `getProductById` to fetch a single product.
+- **Update:** `updateProduct` to modify an existing product.
+- **Delete:** `deleteProduct` to remove a product.
+
+These functions are implemented in `ProductService.js` with corresponding controller methods in `productController.js`.
+
+**Reasoning:** Completing the CRUD functionality is a core requirement for the inventory management system. The implementation follows the established pattern of separating business logic into a service layer and handling HTTP requests/responses in the controller layer. This ensures consistency with the existing codebase and maintains a clean, scalable architecture. Error handling for cases like a product not being found (`404`) has been included for a robust API.

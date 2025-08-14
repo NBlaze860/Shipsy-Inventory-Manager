@@ -1,19 +1,43 @@
-import Product from '../models/ProductModel.js'
-import ProductService from '../services/ProductService.js'
+import Product from '../models/ProductModel.js';
+import ProductService from '../services/ProductService.js';
 
-//Initialize the service
+// Initialize the service
 const productService = new ProductService(Product);
 
-export const getProducts = (req, res) => {
-  //get products
+/**
+ * @description Get all products
+ * @route GET /api/products
+ */
+export const getProducts = async (req, res) => {
+  try {
+    const products = await productService.getProducts();
+    res.status(200).json({ success: true, data: products });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
 };
 
-export const getProductById = (req, res) => {
-  // Get a single product by ID
+/**
+ * @description Get a single product by ID
+ * @route GET /api/products/:id
+ */
+export const getProductById = async (req, res) => {
+  try {
+    const product = await productService.getProductById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ success: false, error: 'Product not found' });
+    }
+    res.status(200).json({ success: true, data: product });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
 };
 
+/**
+ * @description Create a new product
+ * @route POST /api/products
+ */
 export const createProduct = async (req, res) => {
-  // Create a new product
   try {
     const product = await productService.createProduct(req.body);
     res.status(201).json({ success: true, data: product });
@@ -22,10 +46,34 @@ export const createProduct = async (req, res) => {
   }
 };
 
-export const updateProduct = (req, res) => {
-  // Update a product
+/**
+ * @description Update a product
+ * @route PUT /api/products/:id
+ */
+export const updateProduct = async (req, res) => {
+  try {
+    const product = await productService.updateProduct(req.params.id, req.body);
+    if (!product) {
+      return res.status(404).json({ success: false, error: 'Product not found' });
+    }
+    res.status(200).json({ success: true, data: product });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
 };
 
-export const deleteProduct = (req, res) => {
-  // Delete a product
+/**
+ * @description Delete a product
+ * @route DELETE /api/products/:id
+ */
+export const deleteProduct = async (req, res) => {
+  try {
+    const product = await productService.deleteProduct(req.params.id);
+    if (!product) {
+      return res.status(404).json({ success: false, error: 'Product not found' });
+    }
+    res.status(200).json({ success: true, data: {} });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
 };

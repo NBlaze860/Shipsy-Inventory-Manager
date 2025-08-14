@@ -3,22 +3,37 @@ class ProductService {
         this.Product = ProductModel;
     }
 
-    // Create a new product
+    // Create a new product with validation.
     async createProduct(productData) {
-        // Validate input data
         this.validateProductData(productData);
-        
-        // Create new product instance
         const product = new this.Product(productData);
-        
-        
-        // Save to database
         return await product.save();
     }
 
-    // Private validation method
+    // Retrieve all products.
+    async getProducts() {
+        return await this.Product.find();
+    }
+
+    // Retrieve a single product by its ID.
+    async getProductById(id) {
+        return await this.Product.findById(id);
+    }
+
+    // Update an existing product.
+    async updateProduct(id, productData) {
+        this.validateProductData(productData);
+        return await this.Product.findByIdAndUpdate(id, productData, { new: true});
+    }
+
+    // Delete a product by its ID.
+    async deleteProduct(id) {
+        return await this.Product.findByIdAndDelete(id);
+    }
+
+    // Private validation method for product data.
     validateProductData(data) {
-        if (!data.name || data.name.trim().length === 0) {
+        if (data.name && data.name.trim().length === 0) {
             throw new Error('Product name is required');
         }
         

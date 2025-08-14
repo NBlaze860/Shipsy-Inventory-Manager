@@ -15,6 +15,9 @@ The backend follows a layered architecture to ensure a clear separation of conce
   - `productController.js`: Contains the logic for CRUD operations on products.
   - `analyticsController.js`: Contains placeholder logic for analytics.
 - **Services (`src/services`):** Contains the core business logic of the application. It interacts with the models to access and manipulate data.
+  - `AuthService.js`: Handles the business logic for user authentication.
+  - `ProductService.js`: Implements the business logic for all CRUD operations on products.
+  - `AnalyticsService.js`: A placeholder for future analytics-related business logic.
 - **Models (`src/models`):** Defines the database schemas and provides an interface to interact with the database.
   - `User.js`: User authentication and authorization model with role-based access control.
   - `Product.js`: Product inventory model with automatic value calculations and user references.
