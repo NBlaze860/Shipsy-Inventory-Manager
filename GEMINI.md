@@ -1,9 +1,33 @@
 ## Current Prompt
+Fill in each route file using Express Router, mapping them to the correct controller functions as follows:
+
+Authentication Endpoints (routes/auth.js)
+- POST /api/auth/register → registerUser
+- POST /api/auth/login → loginUser
+- GET /api/auth/profile → getUserProfile
+
+Product Endpoints (routes/products.js)
+- GET /api/products → getProducts
+- GET /api/products/:id → getProductById
+- POST /api/products → createProduct
+- PUT /api/products/:id → updateProduct
+- DELETE /api/products/:id → deleteProduct
+
+Analytics Endpoints (routes/analytics.js)
+- Leave empty except for a placeholder GET route and explanatory comment.
+
+In each controller file, export functions for the above routes with placeholder implementations:
+Example:
+```js
+
+export const registerUser = (req, res) => {
+  // Register a new user
+};
 
 
+Now follow the below prompts.
 ---
 
-## Design.md Update Prompt
 
 Update the /docs/DESIGN.md file for this project based on the changes we just discussed. 
 Follow these rules:
@@ -16,7 +40,6 @@ Follow these rules:
 
 ---
 
-## Architecture.md Update Prompt
 
 Update the /docs/ARCHITECTURE.md file to reflect the latest changes in code or system design from this session. 
 Follow these rules:
@@ -29,7 +52,6 @@ Follow these rules:
 
 ---
 
-## AI_Usage.md Update Prompt
 
 Update the /docs/AI_USAGE.md file for this project based on the AI interaction we just had. 
 Follow these rules:
