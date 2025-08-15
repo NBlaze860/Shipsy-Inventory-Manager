@@ -325,3 +325,34 @@
     - **Reasoning:** The goal was to implement a clean and modular routing solution for the frontend application. The changes provide a seamless user experience by directing unauthenticated users to the login page by default.
     - **Verification method:** The user can manually review the code changes in the `App.jsx` file and the updates to the documentation files.
     - **Related Commit:** Pending user commit
+
+11. **Date:** 2025-08-15 04:30 PM (Approximate)
+
+    - **Context:** The user wanted to set up Redux for state management in the frontend, specifically for handling user authentication.
+    - **Exact Prompt:** The user provided instructions via the `GEMINI.md` file to set up React Redux, create an `authSlice.js` file with async thunks for signup, login, and logout, and configure the Redux store. The user also requested to update the documentation files.
+    - **AI Output Summary:** The AI successfully installed the required Redux dependencies, created the `authSlice.js` file with the specified async thunks, configured the Redux store in `store.js`, and wrapped the application with the Redux Provider in `main.jsx`. It also updated the `DESIGN.md`, `ARCHITECTURE.md`, and `AI_USAGE.md` files to reflect these changes.
+    - **Applied Changes:**
+      - `frontend/package.json`: Added `@reduxjs/toolkit`, `react-redux`, and `axios`.
+      - `frontend/src/store/authSlice.js`: Created the auth slice with async thunks for authentication.
+      - `frontend/src/store/store.js`: Configured the Redux store.
+      - `frontend/src/main.jsx`: Wrapped the `App` component with the Redux `Provider`.
+      - `docs/DESIGN.md`: Added a new section explaining the frontend state management decisions.
+      - `docs/ARCHITECTURE.md`: Updated the frontend architecture section to include details about the Redux store.
+      - `docs/AI_USAGE.md`: Added this entry to log the interaction.
+    - **Reasoning:** The goal was to implement a robust and scalable state management solution for the frontend application. Redux Toolkit provides a centralized store for managing application state, which is essential for features like user authentication.
+    - **Verification method:** The user can manually review the code changes in the created and modified files and the updates to the documentation files.
+    - **Related Commit:** Pending user commit
+
+12. **Date:** 2025-08-15 05:00 PM (Approximate)
+
+    - **Context:** The user wanted to refine the `authSlice.js` to correctly handle the user state based on the backend response.
+    - **Exact Prompt:** "For the auth slice, if the login or signup is successful, update the user state to the response sent by the backend ( {_id, username, email, role} ) and set user to null if logout."
+    - **AI Output Summary:** The AI updated the `frontend/src/store/authSlice.js` file to improve clarity and explicitly define the user state shape in the initial state. It added comments to explain the purpose of each part of the code.
+    - **Applied Changes:**
+      - `frontend/src/store/authSlice.js`: Modified the file to add comments and a more explicit initial state for the user.
+      - `docs/DESIGN.md`: Added a "Redux Auth Slice State Shape" section.
+      - `docs/ARCHITECTURE.md`: Added a "Redux Auth Slice" section.
+      - `docs/AI_USAGE.md`: Added this entry to log the interaction.
+    - **Reasoning:** To ensure the frontend state correctly reflects the data sent by the backend upon successful authentication and to improve the clarity and maintainability of the code.
+    - **Verification method:** The user can manually review the code changes in `frontend/src/store/authSlice.js` and the updates to the documentation files.
+    - **Related Commit:** Pending user commit

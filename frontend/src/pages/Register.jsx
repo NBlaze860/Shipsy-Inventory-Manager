@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { signup } from '../store/authSlice';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +13,20 @@ const Register = () => {
   });
 
   const { username, email, password } = formData;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, loading, error } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error.message || 'Registration failed');
+    }
+    if (user) {
+      navigate('/products');
+    }
+  }, [user, error, navigate]);
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,8 +43,7 @@ const Register = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Perform registration logic here
-      console.log('Form is valid');
+      dispatch(signup({ username, email, password }));
     }
   };
 
@@ -109,9 +124,10 @@ const Register = () => {
             <div>
               <button
                 type="submit"
+                disabled={loading}
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Register
+                {loading ? 'Registering...' : 'Register'}
               </button>
             </div>
           </form>

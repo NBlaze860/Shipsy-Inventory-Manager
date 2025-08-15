@@ -1,28 +1,85 @@
-Implement React Router in the frontend.
+Setup React Redux in the existing frontend codebase.  
+Inside /src/store, create an `authSlice.js` file.  
 
-Install react-router-dom if not already installed.
+1. **State Shape**:  
+User {
+  username: string,
+  email: string,
+  password: string
+}
+Also include loading (boolean) and error (string | null) fields for API status handling.
 
-In the main application entry (e.g., App.jsx), wrap the app in <BrowserRouter>.
+Reducers (Async Thunks):
 
-Create routes for:
+signup → Calls backend endpoint:
 
-/register → Register.jsx page
+Method: POST
 
-/login → Login.jsx page
+URL: /api/auth/register
 
-Ensure navigation links between pages work correctly (e.g., “Already have an account? Login” and “Don’t have an account? Register”).
+Body: { username, email, password }
 
-Set /login as the default route (redirect from / to /login).
+On success: store returned user data in state, clear errors.
 
-Keep the routing setup clean and modular in App.jsx.
+On failure: store error message in state.
 
-Design requirements:
+login → Calls backend endpoint:
 
-Maintain consistent minimalistic styling across all pages.
+Method: POST
 
-Ensure page transitions are smooth (optional: add basic CSS fade-in).
+URL: /api/auth/login
 
-Confirm form validations from previous step still work after routing integration.
+Body: { email, password }
+
+On success: store returned user data in state, clear errors.
+
+On failure: store error message in state.
+
+logout → Calls backend endpoint:
+
+Method: POST
+
+URL: /api/auth/logout
+
+No body.
+
+On success: reset user state to initial values.
+
+On failure: store error message in state.
+
+Implementation Notes:
+
+Use @reduxjs/toolkit to create slice and async thunks.
+
+Use axiosInstance from /src/lib/axios.js for all API calls.
+
+Include clear and concise comments explaining each step.
+
+Keep code clean, simple, and professional.
+
+Ensure error handling covers 400 and 500 status codes.
+
+Export the reducer and actions for use in store configuration.
+
+Example Folder Structure:
+
+pgsql
+Copy
+Edit
+src/
+  store/
+    authSlice.js
+    index.js  // where store is configured
+  lib/
+    axios.js
+Example State Handling:
+
+While API call is in progress → loading = true
+
+On success → update user and set loading = false
+
+On failure → set error message and loading = false
+
 
 YOU MUST NOT TAKE ANY ACTION FOR GIT OR GITHUB.
 

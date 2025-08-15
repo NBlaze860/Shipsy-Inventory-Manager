@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { login } from '../store/authSlice';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +12,20 @@ const Login = () => {
   });
 
   const { email, password } = formData;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, loading, error } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error.message || 'Login failed');
+    }
+    if (user) {
+      navigate('/products');
+    }
+  }, [user, error, navigate]);
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,8 +40,7 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Perform login logic here
-      console.log('Form is valid');
+      dispatch(login({ email, password }));
     }
   };
 
@@ -85,9 +100,10 @@ const Login = () => {
             <div>
               <button
                 type="submit"
+                disabled={loading}
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Sign in
+                {loading ? 'Signing in...' : 'Sign in'}
               </button>
             </div>
           </form>

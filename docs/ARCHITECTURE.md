@@ -38,7 +38,7 @@ The frontend is structured to support a scalable and maintainable React applicat
   - `auth/`, `products/`, `analytics/`: Feature-specific components related to authentication, products, and analytics.
 - **`src/pages`**: Contains top-level components that represent the different pages of the application (e.g., `Login.jsx`, `Register.jsx`, `Dashboard.jsx`). Each page component is responsible for composing the layout and components for a specific route.
 - **`src/store`**: Holds all the Redux-related code for state management.
-  - `index.js`: The main Redux store configuration.
+  - `store.js`: The main Redux store configuration.
   - `*Slice.js`: Redux Toolkit slices that define the state, reducers, and actions for different features (e.g., `authSlice.js`, `productsSlice.js`).
 - **`src/utils`**: A collection of helper functions and utilities that can be used throughout the application.
 - **`src/styles`**: Contains global CSS files and styling-related configurations.
@@ -50,6 +50,17 @@ The frontend routing is managed by `react-router-dom`. The main application rout
 - `/register`: Renders the `Register` component.
 - `/dashboard`: Renders the `Dashboard` component.
 - `/`: Redirects to `/login`.
+
+### Redux Auth Slice
+
+The `authSlice.js` file is a key part of the frontend state management, responsible for handling all authentication-related logic. It uses Redux Toolkit's `createSlice` and `createAsyncThunk` to manage the user's authentication state.
+
+- **State Shape:** The slice manages the `user` object, a `loading` boolean, and an `error` string/null.
+- **Async Thunks:**
+  - `signup`: Handles user registration by making a `POST` request to `/api/auth/register`.
+  - `login`: Handles user login by making a `POST` request to `/api/auth/login`.
+  - `logout`: Handles user logout by making a `POST` request to `/api/auth/logout`.
+- **Reducers:** The slice includes reducers to handle the pending, fulfilled, and rejected states of the async thunks, updating the state accordingly.
 
 ## Database Schema
 

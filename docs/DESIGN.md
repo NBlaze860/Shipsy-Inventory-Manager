@@ -163,3 +163,22 @@ These functions are implemented in `AuthService.js` with corresponding controlle
 - `/dashboard`: A placeholder for the main application dashboard.
 
 **Reasoning:** `react-router-dom` is the standard routing library for React applications. It provides a declarative way to manage routes and navigation, making the application easy to understand and maintain. Setting `/login` as the default route ensures that unauthenticated users are directed to the login page first.
+
+## Frontend State Management with Redux
+
+**Context:** As the application grows, managing state with React's built-in state management can become complex. A centralized state management solution is needed to handle application-wide state, such as user authentication and product data.
+
+**Decision:** Redux Toolkit will be used for state management in the frontend. An `authSlice` has been created to handle user authentication, including `signup`, `login`, and `logout` actions. The Redux store has been configured and provided to the application using `react-redux`.
+
+**Reasoning:** Redux Toolkit is the recommended approach for writing Redux logic. It simplifies store setup, reduces boilerplate code, and includes built-in best practices. Using Redux for state management provides a single source of truth for the application's state, making it easier to debug and maintain. The `authSlice` encapsulates all authentication-related state and logic, promoting a modular and organized codebase.
+
+## Redux Auth Slice State Shape
+
+**Context:** The `authSlice` in the Redux store needs a well-defined state shape to manage user authentication data, loading states, and errors effectively.
+
+**Decision:** The `authSlice` will have the following state shape:
+- `user`: An object containing the authenticated user's data (`{_id, username, email, role}`) upon successful login or signup, and `null` when logged out or in an unauthenticated state.
+- `loading`: A boolean flag to indicate when an asynchronous authentication operation (signup, login, logout) is in progress.
+- `error`: A string or `null` to store any error messages that occur during authentication, allowing the UI to display feedback to the user.
+
+**Reasoning:** This state shape provides a clear and comprehensive representation of the authentication status. Storing the user object allows the application to easily access user information. The `loading` state is crucial for providing UI feedback during asynchronous operations, such as showing a spinner. The `error` state enables robust error handling and communication of issues to the user. This structure is clean, simple, and aligns with best practices for managing asynchronous state in Redux.
