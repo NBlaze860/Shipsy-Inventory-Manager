@@ -232,3 +232,41 @@
     - **Reasoning:** This change is a critical security feature to ensure data privacy and prevent unauthorized access to user data in a multi-tenant application.
     - **Verification method:** The user can manually review the code changes in `ProductService.js` and `productController.js` and the updates to the documentation files.
     - **Related Commit:** Pending user commit
+7.  **D
+ate:** 2025-08-15 02:45 PM
+
+    - **Context:** The user wanted to create a new backend route for an AI-powered product chatbot that uses Gemini LLM to answer product-related queries for authenticated users.
+    - **Exact Prompt:**
+
+      ```
+      Create a new backend route in the "analytics" module for a simple product-related chatbot.
+
+      Requirements:
+      1. Route: POST /analytics/chatbot
+      2. Input: JSON body with a field "prompt" (string).
+      3. Authentication: Use the existing auth middleware to identify the current logged-in user.
+      4. Behavior:
+         - Use Gemini as the LLM.
+         - Respond ONLY to queries related to the current authenticated user's products.
+         - Fetch product data from the database filtered by the current user's ID.
+         - If the prompt is not product-related, respond with a short message: "Not related to products."
+         - Reply concisely — minimal words, only as much as needed to answer.
+      5. Implementation:
+         - Extract the authenticated user ID from the request.
+         - Get all products belonging to the user.
+         - Pass both the prompt and the product list as context to Gemini.
+         - Return Gemini's response in JSON { "reply": "..." }.
+      6. Code style: Match the existing project conventions, async/await style, and proper error handling.
+      ```
+
+    - **AI Output Summary:** The AI successfully implemented the chatbot functionality by creating a new POST endpoint at `/analytics/chatbot` with proper authentication, user-specific product filtering, and Gemini LLM integration. The implementation includes comprehensive error handling and follows existing project conventions.
+    - **Applied Changes:**
+      - `backend/src/controllers/analyticsController.js`: Added `chatbot` controller function with authentication, product fetching, and Gemini integration
+      - `backend/src/routes/analytics.js`: Added new POST route with authentication middleware
+      - `backend/.env.example`: Added GEMINI_API_KEY configuration
+      - `docs/DESIGN.md`: Added new section documenting the AI-powered chatbot design decision
+      - `docs/ARCHITECTURE.md`: Updated service and route descriptions to include chatbot functionality
+      - `docs/AI_USAGE.md`: Added this entry to log the interaction
+    - **Reasoning:** The chatbot feature provides users with an intuitive way to query their product data using natural language while maintaining security through user-specific filtering and authentication. The implementation leverages the existing GeminiService and follows established architectural patterns.
+    - **Verification method:** The user can test the endpoint by sending POST requests to `/api/analytics/chatbot` with proper authentication and verify the responses are contextual to their products.
+    - **Related Commit:** Pending user commit

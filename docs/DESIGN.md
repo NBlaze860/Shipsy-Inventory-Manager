@@ -99,3 +99,31 @@ These functions are implemented in `AuthService.js` with corresponding controlle
 - Adding ownership validation in `productController` to ensure users can only view, update, or delete their own products.
 
 **Reasoning:** This change enforces data privacy and security by restricting access to resources based on ownership. It's a critical feature for a multi-tenant application where users' data should be isolated. This implementation is scalable and aligns with best practices for building secure applications.
+
+## AI-Powered Product Chatbot
+
+**Context:** Users need an intelligent way to query and interact with their product data using natural language. A chatbot interface would improve user experience and provide quick access to product information.
+
+**Decision:** A new analytics endpoint `POST /analytics/chatbot` has been implemented with the following features:
+- Uses Gemini LLM for natural language processing
+- Restricts responses to product-related queries only
+- Filters product data by authenticated user ID for privacy
+- Returns concise, contextual responses based on user's product inventory
+- Implements proper authentication middleware integration
+- Provides fallback response for non-product-related queries
+
+**Reasoning:** This feature enhances user interaction with their inventory data through conversational AI. By restricting access to user-specific products and limiting responses to product-related queries, it maintains security and relevance. The integration with existing authentication ensures data privacy while providing a modern, intuitive interface for inventory management.
+
+## AI-Powered Product Chatbot
+
+**Context:** Users need an intelligent way to query and interact with their product data using natural language. A chatbot interface would improve user experience and provide quick access to product information.
+
+**Decision:** A new analytics endpoint `POST /analytics/chatbot` has been implemented with the following features:
+- Uses Gemini LLM for natural language processing
+- Restricts responses to product-related queries only
+- Filters product data by authenticated user ID for privacy
+- Returns concise, contextual responses based on user's product inventory
+- Implements proper authentication middleware integration
+- Provides fallback response for non-product-related queries
+
+**Reasoning:** This feature enhances user interaction with their inventory data through conversational AI. By restricting access to user-specific products and limiting responses to product-related queries, it maintains security and relevance. The integration with existing authentication ensures data privacy while providing a modern, intuitive interface for inventory management.

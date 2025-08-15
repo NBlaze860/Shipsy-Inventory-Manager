@@ -1,32 +1,28 @@
-Modify the existing Node.js/Express product CRUD system to ensure authenticated users can only access their own products. Make the following minimal changes:
-
-1. **ProductService.js**: Update all methods to accept and use a userId parameter for filtering:
-   - Add userId parameter to createProduct, getProducts, getProductById, updateProduct, deleteProduct methods
-   - Modify database queries to filter by userId (assuming Product model has a userId field)
-   - Add userId to new product creation
-
-2. **productController.js**: Pass the authenticated user's ID from req.user to service methods:
-   - Extract userId from req.user._id in all controller functions
-   - Pass userId to corresponding service methods
-   - Add ownership validation for get/update/delete operations
-
-3. **Product Model assumption**: The code should assume the Product model has a userId field that references the User model.
+Create a new backend route in the "analytics" module for a simple product-related chatbot.
 
 Requirements:
-- Keep changes minimal and focused
-- Add clear, self-explanatory comments
-- Maintain existing error handling patterns
-- Ensure users can only see/modify their own products
-- Professional code style with proper validation
-- No changes needed to routes or auth middleware
+1. Route: POST /analytics/chatbot
+2. Input: JSON body with a field "prompt" (string).
+3. Authentication: Use the existing auth middleware to identify the current logged-in user.
+4. Behavior:
+   - Use Gemini as the LLM.
+   - Respond ONLY to queries related to the current authenticated user’s products.
+   - Fetch product data from the database filtered by the current user's ID.
+   - If the prompt is not product-related, respond with a short message: "Not related to products."
+   - Reply concisely — minimal words, only as much as needed to answer.
+5. Implementation:
+   - Extract the authenticated user ID from the request.
+   - Get all products belonging to the user.
+   - Pass both the prompt and the product list as context to Gemini.
+   - Return Gemini's response in JSON { "reply": "..." }.
+6. Code style: Match the existing project conventions, async/await style, and proper error handling.
 
-The auth middleware already provides req.user, so use req.user._id as the userId in controllers.
 
 
 
 YOU MUST NOT TAKE ANY ACTION FOR GIT OR GITHUB.
 
-Now follow the below prompts.
+Follow the below prompts only after completing the above prompt.
 ---
 
 

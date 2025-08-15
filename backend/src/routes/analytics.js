@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { getAnalytics } from '../controllers/analyticsController.js';
+import { chatbot } from '../controllers/analyticsController.js';
+import { protectRoute } from '../middleware/authMiddleware.js';
 
 const router = Router();
 
-// Placeholder for analytics endpoints
-router.get('/', getAnalytics);
+// Chatbot endpoint for product-related queries
+router.post('/chatbot', protectRoute, chatbot);
 
 export default router;
