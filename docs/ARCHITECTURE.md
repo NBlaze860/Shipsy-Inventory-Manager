@@ -26,6 +26,23 @@ The backend follows a layered architecture to ensure a clear separation of conce
 - **Config (`src/config`):** Contains configuration files for the database, JWT, and other services.
 - **Utils (`src/utils`):** Contains utility functions that can be used throughout the application.
 
+## Frontend Architecture
+
+The frontend is structured to support a scalable and maintainable React application, with a clear separation of concerns.
+
+### Directory Structure
+
+- **`src/components`**: Contains reusable components that are used across different parts of the application.
+  - `ui/`: Basic, general-purpose UI elements like buttons, inputs, and modals.
+  - `layout/`: Components that define the overall structure of the application, such as headers, footers, and sidebars.
+  - `auth/`, `products/`, `analytics/`: Feature-specific components related to authentication, products, and analytics.
+- **`src/pages`**: Contains top-level components that represent the different pages of the application (e.g., `Login.jsx`, `Dashboard.jsx`). Each page component is responsible for composing the layout and components for a specific route.
+- **`src/store`**: Holds all the Redux-related code for state management.
+  - `index.js`: The main Redux store configuration.
+  - `*Slice.js`: Redux Toolkit slices that define the state, reducers, and actions for different features (e.g., `authSlice.js`, `productsSlice.js`).
+- **`src/utils`**: A collection of helper functions and utilities that can be used throughout the application.
+- **`src/styles`**: Contains global CSS files and styling-related configurations.
+
 ## Database Schema
 
 ### User Model

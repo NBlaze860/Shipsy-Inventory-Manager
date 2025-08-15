@@ -1,24 +1,25 @@
-Create a new backend route in the "analytics" module for a simple product-related chatbot.
-
-Requirements:
-1. Route: POST /analytics/chatbot
-2. Input: JSON body with a field "prompt" (string).
-3. Authentication: Use the existing auth middleware to identify the current logged-in user.
-4. Behavior:
-   - Use Gemini as the LLM.
-   - Respond ONLY to queries related to the current authenticated user’s products.
-   - Fetch product data from the database filtered by the current user's ID.
-   - If the prompt is not product-related, respond with a short message: "Not related to products."
-   - Reply concisely — minimal words, only as much as needed to answer.
-5. Implementation:
-   - Extract the authenticated user ID from the request.
-   - Get all products belonging to the user.
-   - Pass both the prompt and the product list as context to Gemini.
-   - Return Gemini's response in JSON { "reply": "..." }.
-6. Code style: Match the existing project conventions, async/await style, and proper error handling.
-
-
-
+Create the exact folder structure below in the frontend folder and keep the files empty ( unless they are already present).
+src/
+├── components/          # All reusable components
+│   ├── ui/             # Basic UI components
+│   ├── layout/         # Layout components
+│   ├── auth/           # Authentication components
+│   ├── products/
+│   └── analytics/
+├── pages/              # Page components
+│   ├── Login.jsx
+│   ├── Register.jsx
+│   ├── Dashboard.jsx
+│   ├── Products.jsx
+│   └── Profile.jsx
+├── store/              # Redux store & slices
+│   ├── index.js        # Store configuration
+│   ├── authSlice.js
+│   ├── productsSlice.js
+│   └── analyticsSlice.js
+├── utils/              # Utilities & helpers
+├── styles/             # Global styles
+└── App.jsx
 
 YOU MUST NOT TAKE ANY ACTION FOR GIT OR GITHUB.
 

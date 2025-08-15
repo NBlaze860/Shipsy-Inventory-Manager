@@ -127,3 +127,16 @@ These functions are implemented in `AuthService.js` with corresponding controlle
 - Provides fallback response for non-product-related queries
 
 **Reasoning:** This feature enhances user interaction with their inventory data through conversational AI. By restricting access to user-specific products and limiting responses to product-related queries, it maintains security and relevance. The integration with existing authentication ensures data privacy while providing a modern, intuitive interface for inventory management.
+
+## Frontend Project Structure
+
+**Context:** A well-organized frontend project structure is essential for building a scalable and maintainable React application. The structure should provide clear separation of concerns and make it easy for developers to locate and work on different parts of the application.
+
+**Decision:** The frontend will adopt a standard feature-based folder structure. The main directories under `src/` are:
+- `components/`: For reusable UI components, further divided into `ui/`, `layout/`, `auth/`, `products/`, and `analytics/`.
+- `pages/`: For top-level page components that correspond to application routes.
+- `store/`: For Redux state management, including the store configuration and slices for different features.
+- `utils/`: For utility functions and helpers.
+- `styles/`: For global styles.
+
+**Reasoning:** This structure is a widely adopted best practice in the React community. It promotes modularity by organizing files by feature, which makes the codebase easier to understand, scale, and maintain. The separation of components, pages, and state management logic ensures a clean architecture and improves developer productivity.
