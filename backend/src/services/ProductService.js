@@ -7,7 +7,11 @@ class ProductService {
     async createProduct(productData, userId) {
         this.validateProductData(productData);
         const product = new this.Product({ ...productData, createdBy: userId });
-        return await product.save();
+        const savedProduct = await product.save();
+        if (!savedProduct) {
+            throw new Error('Failed to create product');
+        }
+        return savedProduct;
     }
 
     // Retrieve all products for a specific user.
@@ -17,18 +21,30 @@ class ProductService {
 
     // Retrieve a single product by its ID for a specific user.
     async getProductById(id, userId) {
-        return await this.Product.findOne({ _id: id, createdBy: userId });
+        const product = await this.Product.findOne({ _id: id, createdBy: userId });
+        if (!product) {
+            throw new Error('Product not found');
+        }
+        return product;
     }
 
     // Update an existing product for a specific user.
     async updateProduct(id, productData, userId) {
         this.validateProductData(productData);
-        return await this.Product.findOneAndUpdate({ _id: id, createdBy: userId }, productData, { new: true});
+        const product = await this.Product.findOneAndUpdate({ _id: id, createdBy: userId }, productData, { new: true});
+        if (!product) {
+            throw new Error('Product not found');
+        }
+        return product;
     }
 
     // Delete a product by its ID for a specific user.
     async deleteProduct(id, userId) {
-        return await this.Product.findOneAndDelete({ _id: id, createdBy: userId });
+        const product = await this.Product.findOneAndDelete({ _id: id, createdBy: userId });
+        if (!product) {
+            throw new Error('Product not found');
+        }
+        return product;
     }
 
     // Private validation method for product data.
