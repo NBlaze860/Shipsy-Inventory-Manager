@@ -17,3 +17,6 @@
 
 ## Commit 6 :
 ![alt text](./commit_images/image3.png)
+
+## Commit 7 :
+![alt text](./commit_images/image4.png)

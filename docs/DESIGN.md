@@ -73,3 +73,29 @@
 These functions are implemented in `ProductService.js` with corresponding controller methods in `productController.js`.
 
 **Reasoning:** Completing the CRUD functionality is a core requirement for the inventory management system. The implementation follows the established pattern of separating business logic into a service layer and handling HTTP requests/responses in the controller layer. This ensures consistency with the existing codebase and maintains a clean, scalable architecture. Error handling for cases like a product not being found (`404`) has been included for a robust API.
+
+
+## User Authentication Features
+
+**Context:** The initial authentication setup only included user registration. To provide a complete authentication system, login, logout, and profile retrieval functionalities were required.
+
+**Decision:** The following authentication features have been implemented:
+- **Login:** `login` in `AuthService.js` to authenticate users and issue a JWT.
+- **Logout:** `logout` in `AuthService.js` to clear the JWT cookie.
+- **Get Profile:** `getProfile` in `AuthService.js` to retrieve the profile of the currently authenticated user.
+
+These functions are implemented in `AuthService.js` with corresponding controller methods in `authController.js`.
+
+**Reasoning:** These features are essential for any application that requires user authentication. The implementation follows the established pattern of separating business logic into a service layer and handling HTTP requests/responses in the controller layer. This ensures consistency with the existing codebase and maintains a clean, scalable architecture. The use of JWTs provides a secure and stateless authentication mechanism.
+
+## User-Specific Product Access
+
+**Context:** The previous implementation allowed any authenticated user to access all products in the system. This is a security risk and does not align with the multi-user nature of the inventory management system.
+
+**Decision:** The `ProductService` and `productController` have been updated to ensure that users can only access their own products. This was achieved by:
+- Adding a `userId` parameter to all `ProductService` methods.
+- Modifying the database queries in `ProductService` to filter products by `userId`.
+- Passing the authenticated user's ID from `req.user._id` to the `ProductService` methods in `productController`.
+- Adding ownership validation in `productController` to ensure users can only view, update, or delete their own products.
+
+**Reasoning:** This change enforces data privacy and security by restricting access to resources based on ownership. It's a critical feature for a multi-tenant application where users' data should be isolated. This implementation is scalable and aligns with best practices for building secure applications.

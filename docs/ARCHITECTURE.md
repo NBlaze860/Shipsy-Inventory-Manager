@@ -12,11 +12,11 @@ The backend follows a layered architecture to ensure a clear separation of conce
   - `analytics.js`: Handles analytics-related routes (`/api/analytics`).
 - **Controllers (`src/controllers`):** Handles incoming requests, validates the data, and calls the appropriate services to perform business logic.
   - `authController.js`: Contains the logic for user registration, login, logout, and profile retrieval.
-  - `productController.js`: Contains the logic for CRUD operations on products.
+  - `productController.js`: Contains the logic for CRUD operations on products, ensuring that users can only access their own products by passing the authenticated user's ID to the service layer and handling ownership validation.
   - `analyticsController.js`: Contains placeholder logic for analytics.
 - **Services (`src/services`):** Contains the core business logic of the application. It interacts with the models to access and manipulate data.
   - `AuthService.js`: Handles the business logic for user signup, login, logout, and profile retrieval.
-  - `ProductService.js`: Implements the business logic for all CRUD operations on products.
+  - `ProductService.js`: Implements the business logic for all CRUD operations on products, filtering products based on the `userId` to ensure data privacy.
   - `AnalyticsService.js`: A placeholder for future analytics-related business logic.
 - **Models (`src/models`):** Defines the database schemas and provides an interface to interact with the database.
   - `User.js`: User authentication and authorization model with role-based access control.
@@ -51,6 +51,6 @@ The backend follows a layered architecture to ensure a clear separation of conce
 | unitPrice   | Number   | Required, min 0                                                       | Price per unit              |
 | isActive    | Boolean  | Default: true                                                         | Product availability flag   |
 | totalValue  | Number   | Auto-calculated                                                       | quantity × unitPrice        |
-| createdBy   | ObjectId | Required, ref: User                                                   | Product creator reference   |
+| userId      | ObjectId | Required, ref: User                                                   | Product creator reference   |
 | createdAt   | Date     | Auto-generated                                                        | Creation timestamp          |
 | updatedAt   | Date     | Auto-generated                                                        | Last modification timestamp |

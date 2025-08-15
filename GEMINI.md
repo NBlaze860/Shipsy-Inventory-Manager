@@ -1,32 +1,27 @@
-Read the files AuthService.js and authController.js to fully understand the current signup implementation — including code style, structure, and comments. 
+Modify the existing Node.js/Express product CRUD system to ensure authenticated users can only access their own products. Make the following minimal changes:
 
-Then, using the same clean, modular, and well-documented approach, implement the following routes in the controller and service layers:
+1. **ProductService.js**: Update all methods to accept and use a userId parameter for filtering:
+   - Add userId parameter to createProduct, getProducts, getProductById, updateProduct, deleteProduct methods
+   - Modify database queries to filter by userId (assuming Product model has a userId field)
+   - Add userId to new product creation
 
-1. **Login**
-   - Accept `email` and `password` in the request body.
-   - Check if the user exists in the database.
-   - Compare the provided password with the hashed password using bcrypt.
-   - If credentials are valid, generate an auth token with `generateToken(user._id, res)`.
-   - Return user details except password in the response.
-   - Return `400` for invalid credentials, `500` for server errors.
+2. **productController.js**: Pass the authenticated user's ID from req.user to service methods:
+   - Extract userId from req.user._id in all controller functions
+   - Pass userId to corresponding service methods
+   - Add ownership validation for get/update/delete operations
 
-2. **Logout**
-   - Clear the `jwt` cookie by setting it to an empty string with `{ maxAge: 0 }`.
-   - Return a success message on logout.
-   - Handle and log any server errors.
+3. **Product Model assumption**: The code should assume the Product model has a userId field that references the User model.
 
-3. **Get Profile**
-   - Extract the user ID from the JWT token.
-   - Fetch the user details from the database using the user ID.
-   - Return the user object.
-   - Handle and log errors, returning `500` for internal failures.
+Requirements:
+- Keep changes minimal and focused
+- Add clear, self-explanatory comments
+- Maintain existing error handling patterns
+- Ensure users can only see/modify their own products
+- Professional code style with proper validation
+- No changes needed to routes or auth middleware
 
-General Requirements:
-- Maintain the same clean, readable style as the signup route.
-- Use async/await with try/catch for error handling.
-- Use proper HTTP status codes and descriptive JSON messages.
-- Keep logic separated between services and controllers.
-- Include meaningful comments explaining each key step.
+The auth middleware already provides req.user, so use req.user._id as the userId in controllers.
+
 
 
 YOU MUST NOT TAKE ANY ACTION FOR GIT OR GITHUB.
