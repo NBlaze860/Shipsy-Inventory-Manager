@@ -11,11 +11,11 @@ The backend follows a layered architecture to ensure a clear separation of conce
   - `products.js`: Handles product-related routes (`/api/products`).
   - `analytics.js`: Handles analytics-related routes (`/api/analytics`).
 - **Controllers (`src/controllers`):** Handles incoming requests, validates the data, and calls the appropriate services to perform business logic.
-  - `authController.js`: Contains the logic for user registration, login, and profile retrieval.
+  - `authController.js`: Contains the logic for user registration, login, logout, and profile retrieval.
   - `productController.js`: Contains the logic for CRUD operations on products.
   - `analyticsController.js`: Contains placeholder logic for analytics.
 - **Services (`src/services`):** Contains the core business logic of the application. It interacts with the models to access and manipulate data.
-  - `AuthService.js`: Handles the business logic for user authentication.
+  - `AuthService.js`: Handles the business logic for user signup, login, logout, and profile retrieval.
   - `ProductService.js`: Implements the business logic for all CRUD operations on products.
   - `AnalyticsService.js`: A placeholder for future analytics-related business logic.
 - **Models (`src/models`):** Defines the database schemas and provides an interface to interact with the database.
@@ -31,7 +31,7 @@ The backend follows a layered architecture to ensure a clear separation of conce
 
 | Field     | Type     | Constraints                              | Description                      |
 | --------- | -------- | ---------------------------------------- | -------------------------------- |
-| \_id      | ObjectId | Auto-generated                           | Primary key                      |
+| _id      | ObjectId | Auto-generated                           | Primary key                      |
 | username  | String   | Required, unique                         | User identification              |
 | email     | String   | Required, unique                         | Authentication and communication |
 | password  | String   | Required, min 6 chars                    | Hashed password for security     |
@@ -43,7 +43,7 @@ The backend follows a layered architecture to ensure a clear separation of conce
 
 | Field       | Type     | Constraints                                                           | Description                 |
 | ----------- | -------- | --------------------------------------------------------------------- | --------------------------- |
-| \_id        | ObjectId | Auto-generated                                                        | Primary key                 |
+| _id        | ObjectId | Auto-generated                                                        | Primary key                 |
 | name        | String   | Required                                                              | Product identification      |
 | description | String   | Default: ""                                                           | Product details             |
 | category    | String   | Required, enum: ['electronics', 'clothing', 'food', 'books', 'other'] | Product categorization      |

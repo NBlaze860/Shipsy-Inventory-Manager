@@ -1,29 +1,33 @@
-You have access to the following files in my project: ProductService.js, ProductModel.js, and productController.js.
+Read the files AuthService.js and authController.js to fully understand the current signup implementation — including code style, structure, and comments. 
 
-Step 1: Carefully read and analyze these files to fully understand:
-- How the "create product" method was implemented in ProductService.js
-- How the "create product" controller was implemented in productController.js
-- How the ProductModel.js schema works
-- Any patterns, coding style, comments, naming conventions, error handling, and data validation approaches used.
+Then, using the same clean, modular, and well-documented approach, implement the following routes in the controller and service layers:
 
-Step 2: Identify all other controllers in productController.js that currently have placeholders (no real implementation).
+1. **Login**
+   - Accept `email` and `password` in the request body.
+   - Check if the user exists in the database.
+   - Compare the provided password with the hashed password using bcrypt.
+   - If credentials are valid, generate an auth token with `generateToken(user._id, res)`.
+   - Return user details except password in the response.
+   - Return `400` for invalid credentials, `500` for server errors.
 
-Step 3: For each placeholder controller:
-- Implement it following the exact same style, cleanliness, professional quality, and organization as the existing "create product" controller.
-- Implement their corresponding service methods in ProductService.js, following the same style, comments, and professional quality as the "create product" method.
-- If any additional properties or methods are needed in the ProductModel.js to support these features, add them with clear documentation.
+2. **Logout**
+   - Clear the `jwt` cookie by setting it to an empty string with `{ maxAge: 0 }`.
+   - Return a success message on logout.
+   - Handle and log any server errors.
 
-Step 4: Ensure:
-- Code is fully functional and free from syntax errors.
-- Variable naming is consistent and descriptive.
-- Comments are clear, concise, and meaningful.
-- All business logic resides in the service layer, not the controller.
-- Controllers handle request/response and call the correct service methods.
-- Proper error handling is implemented exactly as in "create product".
-- Follow best practices for asynchronous code with async/await.
+3. **Get Profile**
+   - Extract the user ID from the JWT token.
+   - Fetch the user details from the database using the user ID.
+   - Return the user object.
+   - Handle and log errors, returning `500` for internal failures.
 
-Output:
-- The full updated code for ProductService.js and productController.js with all placeholder controllers replaced by complete, professional implementations.
+General Requirements:
+- Maintain the same clean, readable style as the signup route.
+- Use async/await with try/catch for error handling.
+- Use proper HTTP status codes and descriptive JSON messages.
+- Keep logic separated between services and controllers.
+- Include meaningful comments explaining each key step.
+
 
 YOU MUST NOT TAKE ANY ACTION FOR GIT OR GITHUB.
 

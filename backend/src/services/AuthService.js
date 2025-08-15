@@ -86,6 +86,47 @@ class AuthService {
             role: newUser.role,
         };
     }
+
+    async login(userData, res) {
+        const { email, password } = userData;
+
+        /* 1. Find user by email */
+        const user = await this.User.findOne({ email });
+        if (!user) {
+            throw new Error('Invalid credentials');
+        }
+
+        /* 2. Compare passwords */
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            throw new Error('Invalid credentials');
+        }
+
+        /* 3. Generate token and return user data */
+        this.generateToken(user._id, res);
+
+        return {
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            role: user.role,
+        };
+    }
+
+    logout(res) {
+        res.cookie('jwt', '', {
+            httpOnly: true,
+            expires: new Date(0),
+        });
+    }
+
+    async getProfile(userId) {
+        const user = await this.User.findById(userId).select('-password');
+        if (!user) {
+            throw new Error('User not found');
+        }
+        return user;
+    }
 }
 
 export default AuthService;

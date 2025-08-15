@@ -17,6 +17,7 @@
 *   **Authentication**
     *   `POST /api/auth/register`: Register a new user.
     *   `POST /api/auth/login`: Log in an existing user.
+    *   `POST /api/auth/logout`: Log out the current user.
     *   `GET /api/auth/profile`: Get the profile of the currently authenticated user.
 *   **Products**
     *   `GET /api/products`: Get a list of all products.
@@ -39,6 +40,18 @@
 *   **Product Model:** Contains core product information with automatic value calculations and user references
 
 **Reasoning:** This design prioritizes simplicity and maintainability while providing essential functionality. The models use ES6 import/export syntax with minimal but effective validation. The User model supports authentication and authorization needs, while the Product model includes pre-save middleware for automatic total value calculations.
+
+## User Authentication
+
+**Context:** The application requires a secure way to authenticate users and manage their sessions.
+
+**Decision:** User authentication will be implemented using JSON Web Tokens (JWT). The `AuthService` will handle the logic for signing up, logging in, and logging out users. The `authController` will handle the HTTP requests and responses.
+
+*   **Login:** The login process will involve checking the user's credentials, and if they are valid, a JWT will be generated and sent to the client as a cookie.
+*   **Logout:** The logout process will clear the JWT cookie.
+*   **Get Profile:** The user's profile can be retrieved by a protected route that verifies the JWT.
+
+**Reasoning:** JWT is a standard and secure way to handle authentication in web applications. Using a service layer for the business logic and a controller for handling requests and responses follows the principle of separation of concerns, making the code more modular and maintainable.
 
 ## Business Logic Implementation
 
