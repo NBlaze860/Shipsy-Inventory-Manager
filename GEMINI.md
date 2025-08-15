@@ -1,85 +1,89 @@
-Setup React Redux in the existing frontend codebase.  
-Inside /src/store, create an `authSlice.js` file.  
+# Authentication Persistence Implementation
 
-1. **State Shape**:  
-User {
-  username: string,
-  email: string,
-  password: string
-}
-Also include loading (boolean) and error (string | null) fields for API status handling.
+## Objective
+Implement session persistence for user authentication using httpOnly JWT cookies. Users should remain authenticated across browser refreshes and sessions until the JWT expires or they explicitly log out.
 
-Reducers (Async Thunks):
+## Backend Requirements
 
-signup → Calls backend endpoint:
+### 1. Create CheckAuth Route
+- Add a new route `GET /api/auth/check` in the auth routes
+- Follow the existing route structure and naming conventions
+- Use the existing `protectRoute` middleware for authentication
+- Return the authenticated user's profile data (excluding password)
 
-Method: POST
+### 2. Controller Implementation
+- Add `checkAuthUser` function in `authController.js`
+- Follow the same error handling pattern as other auth controllers
+- Use the existing `authService.getProfile()` method
+- Return user data in the same format as login/register responses
 
-URL: /api/auth/register
+## Frontend Requirements
 
-Body: { username, email, password }
+### 1. Redux Auth Slice Updates
+- Add `checkAuth` async thunk that calls the new backend route
+- Add corresponding reducer cases for pending/fulfilled/rejected states
+- Set initial loading state to `true` to check auth on app load
+- Handle auth check failures gracefully (don't show error messages)
 
-On success: store returned user data in state, clear errors.
+### 2. Authentication Provider Component
+- Create `AuthProvider` component that wraps the app
+- Dispatch `checkAuth` on component mount
+- Show loading spinner while checking authentication status
+- Only render children after auth check completes
 
-On failure: store error message in state.
+### 3. App Integration
+- Wrap existing routes with `AuthProvider`
+- Maintain existing route protection logic
+- Ensure no flash of unauthenticated content
 
-login → Calls backend endpoint:
+### 4. Axios Interceptor
+- Add response interceptor to handle 401 errors
+- Automatically dispatch logout action on token expiry
+- Maintain existing axios configuration
 
-Method: POST
+## Implementation Guidelines
 
-URL: /api/auth/login
+### Code Quality Standards
+- Follow existing code patterns and naming conventions
+- Use consistent error handling across all components
+- Maintain clean separation of concerns
+- Keep functions focused and single-purpose
+- Use existing imports and dependencies where possible
 
-Body: { email, password }
+### Minimal Changes Approach
+- Leverage existing authentication infrastructure
+- Reuse current auth service methods
+- Maintain backward compatibility
+- Don't modify existing successful login/register flows
 
-On success: store returned user data in state, clear errors.
+### Security Considerations
+- Keep httpOnly cookie implementation unchanged
+- Maintain existing JWT expiration and security settings
+- Use existing middleware for route protection
+- Don't expose sensitive data in client-side code
 
-On failure: store error message in state.
+## Expected Behavior
+1. User logs in successfully → JWT cookie set → redirected to protected route
+2. User refreshes browser → auth check runs → user stays authenticated
+3. User closes/reopens browser → auth check runs → user stays authenticated (until JWT expires)
+4. JWT expires → 401 response → user automatically logged out
+5. User clicks logout → cookie cleared → redirected to login
 
-logout → Calls backend endpoint:
+## File Structure
+```
+backend/src/
+├── routes/auth.js (add checkAuth route)
+├── controllers/authController.js (add checkAuthUser function)
+└── services/AuthService.js (use existing getProfile method)
 
-Method: POST
+frontend/src/
+├── store/authSlice.js (add checkAuth thunk)
+├── components/AuthProvider.jsx (new file)
+├── App.jsx (wrap with AuthProvider)
+└── lib/axios.js (add response interceptor)
+```
 
-URL: /api/auth/logout
-
-No body.
-
-On success: reset user state to initial values.
-
-On failure: store error message in state.
-
-Implementation Notes:
-
-Use @reduxjs/toolkit to create slice and async thunks.
-
-Use axiosInstance from /src/lib/axios.js for all API calls.
-
-Include clear and concise comments explaining each step.
-
-Keep code clean, simple, and professional.
-
-Ensure error handling covers 400 and 500 status codes.
-
-Export the reducer and actions for use in store configuration.
-
-Example Folder Structure:
-
-pgsql
-Copy
-Edit
-src/
-  store/
-    authSlice.js
-    index.js  // where store is configured
-  lib/
-    axios.js
-Example State Handling:
-
-While API call is in progress → loading = true
-
-On success → update user and set loading = false
-
-On failure → set error message and loading = false
-
+Keep the implementation simple, professional, and maintainable. Focus on reliability and user experience.
 
 YOU MUST NOT TAKE ANY ACTION FOR GIT OR GITHUB.
 

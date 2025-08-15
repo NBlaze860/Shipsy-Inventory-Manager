@@ -182,3 +182,15 @@ These functions are implemented in `AuthService.js` with corresponding controlle
 - `error`: A string or `null` to store any error messages that occur during authentication, allowing the UI to display feedback to the user.
 
 **Reasoning:** This state shape provides a clear and comprehensive representation of the authentication status. Storing the user object allows the application to easily access user information. The `loading` state is crucial for providing UI feedback during asynchronous operations, such as showing a spinner. The `error` state enables robust error handling and communication of issues to the user. This structure is clean, simple, and aligns with best practices for managing asynchronous state in Redux.
+
+## Authentication Persistence
+
+**Context:** Users expect to remain authenticated across browser refreshes and sessions until they explicitly log out or their session expires. The initial implementation required users to log in again after every browser refresh, creating a poor user experience.
+
+**Decision:** Session persistence has been implemented using httpOnly JWT cookies with the following components:
+- **Backend:** New `GET /api/auth/check` route with `checkAuthUser` controller that validates JWT and returns user profile
+- **Frontend:** `checkAuth` async thunk in Redux that calls the auth check endpoint on app initialization
+- **App-level Auth Check:** Direct integration in App.jsx using useEffect to dispatch checkAuth on mount
+- **Initial Loading State:** App starts with `loading: true` to check authentication before rendering routes
+
+**Reasoning:** This implementation provides seamless user experience by maintaining authentication state across sessions while keeping the code simple and maintainable. The httpOnly cookies prevent XSS attacks, the auth check endpoint reuses existing authentication middleware, and the loading state prevents flash of unauthenticated content. By integrating the auth check directly in App.jsx, we avoid unnecessary component abstraction while maintaining clean separation of concerns.

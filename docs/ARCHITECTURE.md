@@ -7,11 +7,11 @@ The backend follows a layered architecture to ensure a clear separation of conce
 ### Layers
 
 - **Routes (`src/routes`):** Defines the API endpoints and maps them to the corresponding controllers.
-  - `auth.js`: Handles authentication-related routes (`/api/auth`).
+  - `auth.js`: Handles authentication-related routes (`/api/auth`) including the new `/check` endpoint for session persistence.
   - `products.js`: Handles product-related routes (`/api/products`).
   - `analytics.js`: Handles analytics-related routes (`/api/analytics`) including the AI chatbot endpoint for product queries.
 - **Controllers (`src/controllers`):** Handles incoming requests, validates the data, and calls the appropriate services to perform business logic.
-  - `authController.js`: Contains the logic for user registration, login, logout, and profile retrieval.
+  - `authController.js`: Contains the logic for user registration, login, logout, profile retrieval, and authentication checking for session persistence.
   - `productController.js`: Contains the logic for CRUD operations on products, ensuring that users can only access their own products by passing the authenticated user's ID to the service layer and handling ownership validation.
   - `analyticsController.js`: Contains analytics logic including AI-powered chatbot functionality for product queries using Gemini LLM with authentication and user-specific product filtering.
 - **Services (`src/services`):** Contains the core business logic of the application. It interacts with the models to access and manipulate data.
@@ -60,7 +60,24 @@ The `authSlice.js` file is a key part of the frontend state management, responsi
   - `signup`: Handles user registration by making a `POST` request to `/api/auth/register`.
   - `login`: Handles user login by making a `POST` request to `/api/auth/login`.
   - `logout`: Handles user logout by making a `POST` request to `/api/auth/logout`.
-- **Reducers:** The slice includes reducers to handle the pending, fulfilled, and rejected states of the async thunks, updating the state accordingly.
+  - `checkAuth`: Handles authentication verification by making a `GET` request to `/api/auth/check` for session persistence.
+- **Reducers:** The slice includes reducers to handle the pending, fulfilled, and rejected states of the async thunks, updating the state accordingly. The initial loading state is set to `true` to check authentication on app initialization.
+
+### Authentication Flow
+
+The application implements session persistence using httpOnly JWT cookies:
+
+1. **Initial Load:** App.jsx dispatches `checkAuth` on component mount using useEffect
+2. **Authentication Check:** `GET /api/auth/check` validates JWT cookie and returns user data
+3. **Loading State:** App shows loading spinner while checking authentication
+4. **Route Protection:** Routes render based on authentication state after check completes
+5. **Manual Logout:** Clears JWT cookie and redirects to login page
+
+### HTTP Client Configuration
+
+The frontend uses Axios with the following configuration:
+- **Base URL:** Automatically detects development vs production environment
+- **Credentials:** `withCredentials: true` for cookie-based authentication
 
 ## Database Schema
 
