@@ -36,7 +36,7 @@ The frontend is structured to support a scalable and maintainable React applicat
   - `ui/`: Basic, general-purpose UI elements like buttons, inputs, and modals.
   - `layout/`: Components that define the overall structure of the application, such as headers, footers, and sidebars.
   - `auth/`, `products/`, `analytics/`: Feature-specific components related to authentication, products, and analytics.
-- **`src/pages`**: Contains top-level components that represent the different pages of the application (e.g., `Login.jsx`, `Register.jsx`, `Dashboard.jsx`). Each page component is responsible for composing the layout and components for a specific route.
+- **`src/pages`**: Contains top-level components that represent the different pages of the application (e.g., `Login.jsx`, `Register.jsx`, `Products.jsx`). Each page component is responsible for composing the layout and components for a specific route.
 - **`src/store`**: Holds all the Redux-related code for state management.
   - `store.js`: The main Redux store configuration.
   - `*Slice.js`: Redux Toolkit slices that define the state, reducers, and actions for different features (e.g., `authSlice.js`, `productsSlice.js`).
@@ -48,7 +48,7 @@ The frontend is structured to support a scalable and maintainable React applicat
 The frontend routing is managed by `react-router-dom`. The main application routes are defined in `App.jsx`:
 - `/login`: The default route, which renders the `Login` component.
 - `/register`: Renders the `Register` component.
-- `/dashboard`: Renders the `Dashboard` component.
+- `/products`: Renders the `Products` component.
 - `/`: Redirects to `/login`.
 
 ### Redux Auth Slice

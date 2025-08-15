@@ -194,3 +194,17 @@ These functions are implemented in `AuthService.js` with corresponding controlle
 - **Initial Loading State:** App starts with `loading: true` to check authentication before rendering routes
 
 **Reasoning:** This implementation provides seamless user experience by maintaining authentication state across sessions while keeping the code simple and maintainable. The httpOnly cookies prevent XSS attacks, the auth check endpoint reuses existing authentication middleware, and the loading state prevents flash of unauthenticated content. By integrating the auth check directly in App.jsx, we avoid unnecessary component abstraction while maintaining clean separation of concerns.
+
+## Products Page UI
+
+**Context:** The application needs a dedicated page to display and manage the user's products. The design should be consistent with the existing login and register pages, providing a clean, intuitive, and professional user experience.
+
+**Decision:** A new `Products.jsx` page has been created with the following design and features:
+- **Layout & Theme:** Follows the same minimalistic theme with a `bg-gray-100` background, `bg-white` cards, and `indigo` accent colors. Consistent spacing, shadows, and `sm:rounded-lg` corners are used to maintain visual harmony with the rest of the application.
+- **Greeting Section:** A personalized greeting message (`Welcome, {user.username}!`) is displayed at the top to create a welcoming experience.
+- **Add Product Button:** A prominent "Add Product" button is placed above the product list, making it easy for users to create new products.
+- **Products List:** Products are displayed in a responsive grid layout. Each product card shows the product's name, category, price, quantity, and total value. Edit and delete buttons are included for each product.
+- **Modal for Create/Edit:** A single, reusable modal is used for both creating and editing products. The modal includes a form with fields for name, description, category, quantity, and unit price. The total value is automatically calculated and displayed.
+- **Empty State:** A message is displayed when the user has no products, guiding them to add their first product.
+
+**Reasoning:** This design provides a comprehensive and user-friendly interface for managing products. The consistent theme and layout create a cohesive user experience. The use of a modal for create/edit operations keeps the main page clean and focused. The responsive grid ensures that the page looks good on all devices. The empty state improves the user experience for new users.
