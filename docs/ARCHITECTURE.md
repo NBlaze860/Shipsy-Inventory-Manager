@@ -36,12 +36,20 @@ The frontend is structured to support a scalable and maintainable React applicat
   - `ui/`: Basic, general-purpose UI elements like buttons, inputs, and modals.
   - `layout/`: Components that define the overall structure of the application, such as headers, footers, and sidebars.
   - `auth/`, `products/`, `analytics/`: Feature-specific components related to authentication, products, and analytics.
-- **`src/pages`**: Contains top-level components that represent the different pages of the application (e.g., `Login.jsx`, `Dashboard.jsx`). Each page component is responsible for composing the layout and components for a specific route.
+- **`src/pages`**: Contains top-level components that represent the different pages of the application (e.g., `Login.jsx`, `Register.jsx`, `Dashboard.jsx`). Each page component is responsible for composing the layout and components for a specific route.
 - **`src/store`**: Holds all the Redux-related code for state management.
   - `index.js`: The main Redux store configuration.
   - `*Slice.js`: Redux Toolkit slices that define the state, reducers, and actions for different features (e.g., `authSlice.js`, `productsSlice.js`).
 - **`src/utils`**: A collection of helper functions and utilities that can be used throughout the application.
 - **`src/styles`**: Contains global CSS files and styling-related configurations.
+
+### Routing
+
+The frontend routing is managed by `react-router-dom`. The main application routes are defined in `App.jsx`:
+- `/login`: The default route, which renders the `Login` component.
+- `/register`: Renders the `Register` component.
+- `/dashboard`: Renders the `Dashboard` component.
+- `/`: Redirects to `/login`.
 
 ## Database Schema
 

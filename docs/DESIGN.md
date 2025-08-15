@@ -139,4 +139,27 @@ These functions are implemented in `AuthService.js` with corresponding controlle
 - `utils/`: For utility functions and helpers.
 - `styles/`: For global styles.
 
-**Reasoning:** This structure is a widely adopted best practice in the React community. It promotes modularity by organizing files by feature, which makes the codebase easier to understand, scale, and maintain. The separation of components, pages, and state management logic ensures a clean architecture and improves developer productivity.
+## Login and Register Pages
+
+**Context:** The application requires user-friendly and visually appealing pages for user registration and login. These pages are the entry point for users and should provide a seamless experience.
+
+**Decision:** Two new pages, `Login.jsx` and `Register.jsx`, have been created with the following features:
+- **Minimalistic Design:** A clean and simple design with a soothing color palette, generous spacing, and readable typography.
+- **Centered Form:** The login and registration forms are placed in a centered card-like container to draw the user's attention.
+- **Rounded Input Fields:** Input fields are rounded to give a modern and friendly look.
+- **Form Validation:** Client-side validation is implemented to provide immediate feedback to the user.
+- **Toast Notifications:** `react-toastify` is used to display clear and concise error messages.
+- **Navigation:** A clear link is provided to navigate between the login and register pages.
+
+**Reasoning:** The design choices are aimed at providing a positive user experience and making the authentication process as smooth as possible. The minimalistic design reduces distractions, while the centered form and clear validation messages guide the user through the process. The use of toast notifications provides non-intrusive feedback, and the navigation link improves the overall usability of the application.
+
+## Frontend Routing
+
+**Context:** A robust routing solution is needed to manage navigation between different pages in the frontend application.
+
+**Decision:** `react-router-dom` will be used for handling client-side routing. The main routes are:
+- `/login`: The default route, which displays the login page.
+- `/register`: Displays the registration page.
+- `/dashboard`: A placeholder for the main application dashboard.
+
+**Reasoning:** `react-router-dom` is the standard routing library for React applications. It provides a declarative way to manage routes and navigation, making the application easy to understand and maintain. Setting `/login` as the default route ensures that unauthenticated users are directed to the login page first.

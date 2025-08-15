@@ -1,25 +1,28 @@
-Create the exact folder structure below in the frontend folder and keep the files empty ( unless they are already present).
-src/
-├── components/          # All reusable components
-│   ├── ui/             # Basic UI components
-│   ├── layout/         # Layout components
-│   ├── auth/           # Authentication components
-│   ├── products/
-│   └── analytics/
-├── pages/              # Page components
-│   ├── Login.jsx
-│   ├── Register.jsx
-│   ├── Dashboard.jsx
-│   ├── Products.jsx
-│   └── Profile.jsx
-├── store/              # Redux store & slices
-│   ├── index.js        # Store configuration
-│   ├── authSlice.js
-│   ├── productsSlice.js
-│   └── analyticsSlice.js
-├── utils/              # Utilities & helpers
-├── styles/             # Global styles
-└── App.jsx
+Implement React Router in the frontend.
+
+Install react-router-dom if not already installed.
+
+In the main application entry (e.g., App.jsx), wrap the app in <BrowserRouter>.
+
+Create routes for:
+
+/register → Register.jsx page
+
+/login → Login.jsx page
+
+Ensure navigation links between pages work correctly (e.g., “Already have an account? Login” and “Don’t have an account? Register”).
+
+Set /login as the default route (redirect from / to /login).
+
+Keep the routing setup clean and modular in App.jsx.
+
+Design requirements:
+
+Maintain consistent minimalistic styling across all pages.
+
+Ensure page transitions are smooth (optional: add basic CSS fade-in).
+
+Confirm form validations from previous step still work after routing integration.
 
 YOU MUST NOT TAKE ANY ACTION FOR GIT OR GITHUB.
 
