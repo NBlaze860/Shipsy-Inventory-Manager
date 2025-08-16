@@ -13,7 +13,7 @@ import {
   getUserProfile,
   checkAuthUser,
 } from "../controllers/authController.js";
-import { protectRoute } from "../middleware/authMiddleware.js";
+import { protectRoute } from "../config/authMiddleware.js";
 
 // Initialize Express router for authentication endpoints
 const router = Router();

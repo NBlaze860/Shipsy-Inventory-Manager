@@ -8,7 +8,7 @@
 
 import { Router } from 'express';
 import { chatbot } from '../controllers/analyticsController.js';
-import { protectRoute } from '../middleware/authMiddleware.js';
+import { protectRoute } from '../config/authMiddleware.js';
 
 // Initialize Express router for analytics endpoints
 const router = Router();

@@ -14,7 +14,7 @@ import {
   updateProduct, 
   deleteProduct 
 } from '../controllers/productController.js';
-import { protectRoute } from '../middleware/authMiddleware.js';
+import { protectRoute } from '../config/authMiddleware.js';
 
 // Initialize Express router for product endpoints
 const router = Router();
