@@ -219,3 +219,15 @@ These functions are implemented in `AuthService.js` with corresponding controlle
 - **Logic:** The pagination logic is handled in the `Products.jsx` component, which slices the product list based on the current page.
 
 **Reasoning:** Pagination improves the user experience and performance of the Products page by breaking down a large number of products into smaller, more manageable chunks. The reusable `Pagination` component promotes code reuse and maintains a consistent look and feel across the application. The styling is consistent with the existing design system, ensuring a seamless user experience.
+
+## Product Filtering
+
+**Context:** To enhance the usability of the Products page, users need the ability to filter the product list based on specific criteria.
+
+**Decision:** A set of filter controls has been added to the Products page, allowing users to filter by category, minimum total value, and maximum total value. A reusable `FilterControls` component was created to encapsulate the filter UI.
+
+- **Controls:** The filter controls include a dropdown for category and number inputs for minimum and maximum total value.
+- **Logic:** The filtering logic is implemented in the `Products.jsx` component. It uses the `filter` method to apply the selected filters to the product list. The pagination is reset to the first page whenever a filter is changed.
+- **Styling:** The filter controls are styled to match the existing form elements in the application, ensuring a consistent look and feel.
+
+**Reasoning:** The addition of filtering functionality provides users with a powerful tool to quickly find the products they are looking for. The reusable `FilterControls` component promotes code reuse and separation of concerns. The decision to reset the pagination on filter changes ensures a better user experience by preventing users from being on a page that no longer exists after filtering.

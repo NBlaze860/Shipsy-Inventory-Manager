@@ -12,6 +12,7 @@ import { logout } from "../store/authSlice";
 import ProductList from "../components/products/ProductList";
 import ProductModal from "../components/products/ProductModal";
 import Pagination from "../components/common/Pagination";
+import FilterControls from "../components/products/FilterControls";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -34,9 +35,27 @@ const Products = () => {
   });
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 9;
+  const [filters, setFilters] = useState({
+    category: "all",
+    minValue: "",
+    maxValue: "",
+  });
 
-  const totalPages = Math.ceil(productList.length / productsPerPage);
-  const paginatedProducts = productList.slice(
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
+    setCurrentPage(1);
+  };
+
+  const filteredProducts = productList.filter((product) => {
+    const totalValue = product.quantity * product.unitPrice;
+    const categoryMatch = filters.category === "all" || product.category === filters.category;
+    const minMatch = filters.minValue === "" || totalValue >= parseFloat(filters.minValue);
+    const maxMatch = filters.maxValue === "" || totalValue <= parseFloat(filters.maxValue);
+    return categoryMatch && minMatch && maxMatch;
+  });
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const paginatedProducts = filteredProducts.slice(
     (currentPage - 1) * productsPerPage,
     currentPage * productsPerPage
   );
@@ -215,10 +234,12 @@ const Products = () => {
           </div>
         </div>
 
+        <FilterControls filters={filters} onFilterChange={handleFilterChange} />
+
         {loading ? (
           <p>Loading...</p>
-        ) : productList.length === 0 ? (
-          <p>No products found. Add a new one to get started!</p>
+        ) : filteredProducts.length === 0 ? (
+          <p>No products found. Add a new one to get started or adjust your filters.</p>
         ) : (
           <ProductList
             products={paginatedProducts}
