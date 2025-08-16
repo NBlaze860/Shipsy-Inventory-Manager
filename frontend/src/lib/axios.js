@@ -19,7 +19,7 @@ import axios from "axios";
 export const axiosInstance = axios.create({
   // Set base URL based on environment - localhost for dev, relative for production
   baseURL:
-    import.meta.env.MODE === "development" ? "http://localhost:8000" : "",
+    import.meta.env.MODE === "development" ? "http://localhost:8000" : "/",
   
   // Include cookies in requests for JWT authentication
   withCredentials: true,
