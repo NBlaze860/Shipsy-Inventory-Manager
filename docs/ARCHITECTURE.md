@@ -86,6 +86,16 @@ The application implements session persistence using httpOnly JWT cookies:
 4. **Route Protection:** Routes render based on authentication state after check completes
 5. **Manual Logout:** Clears JWT cookie and redirects to login page
 
+### Logout Flow
+
+1.  **User Action:** The user clicks the "Logout" button in the application's header.
+2.  **Dispatch Action:** The `handleLogout` function is called, which dispatches the `logout` async thunk from `authSlice`.
+3.  **API Request:** The `logout` thunk sends a `POST` request to the `/api/auth/logout` endpoint on the backend.
+4.  **Clear Cookie:** The backend clears the httpOnly JWT cookie, effectively logging the user out on the server side.
+5.  **Update State:** Upon a successful API response, the `logout.fulfilled` reducer in `authSlice` is executed, setting the `user` state to `null`.
+6.  **Redirect:** The `handleLogout` function in the `Products` component uses the `useNavigate` hook to redirect the user to the `/login` page.
+7.  **UI Update:** The application's UI re-renders, and because the `user` is `null`, the routing logic in `App.jsx` ensures that the `Login` page is displayed.
+
 ### HTTP Client Configuration
 
 The frontend uses Axios with the following configuration:

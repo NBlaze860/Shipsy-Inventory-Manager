@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   getAllProducts,
@@ -7,11 +8,13 @@ import {
   updateProduct,
   deleteProduct,
 } from "../store/productsSlice";
+import { logout } from "../store/authSlice";
 import ProductList from "../components/products/ProductList";
 import ProductModal from "../components/products/ProductModal";
 
 const Products = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const { products, loading, error } = useSelector((state) => state.products);
 
@@ -113,6 +116,18 @@ const Products = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleLogout = () => {
+    dispatch(logout())
+      .unwrap()
+      .then(() => {
+        toast.success("Logged out successfully");
+        navigate("/login");
+      })
+      .catch((error) => {
+        toast.error(error.message || error || "Failed to log out");
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, category, quantity, unitPrice } = formData;
@@ -171,12 +186,20 @@ const Products = () => {
           <h1 className="text-3xl font-extrabold text-gray-900">
             Welcome, {user?.username || "User"}!
           </h1>
-          <button
-            onClick={handleCreate}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Add Product
-          </button>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={handleCreate}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Add Product
+            </button>
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+              Logout
+            </button>
+          </div>
         </div>
 
         {loading ? (
