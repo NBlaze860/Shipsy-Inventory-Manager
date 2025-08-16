@@ -35,9 +35,9 @@ The frontend is structured to support a scalable and maintainable React applicat
 - **`src/components`**: Contains reusable components that are used across different parts of the application.
   - `ui/`: Basic, general-purpose UI elements like buttons, inputs, and modals.
   - `layout/`: Components that define the overall structure of the application, such as headers, footers, and sidebars.
-  - `auth/`, `products/`, `analytics/`: Feature-specific components related to authentication, products, and analytics.
-  - `common/`: Components that are shared across multiple features, such as the `Pagination.jsx` component.
+  - `auth/`: Feature-specific components related to authentication.
   - `products/`: Components related to products, such as `ProductCard.jsx`, `ProductList.jsx`, `ProductModal.jsx`, and `FilterControls.jsx`.
+  - `analytics/`: Feature-specific components related to analytics.
   - `common/`: Components that are shared across multiple features, such as the `Pagination.jsx` component.
 - **`src/pages`**: Contains top-level components that represent the different pages of the application (e.g., `Login.jsx`, `Register.jsx`, `Products.jsx`). Each page component is responsible for composing the layout and components for a specific route.
 - **`src/store`**: Holds all the Redux-related code for state management.
@@ -45,6 +45,15 @@ The frontend is structured to support a scalable and maintainable React applicat
   - `*Slice.js`: Redux Toolkit slices that define the state, reducers, and actions for different features (e.g., `authSlice.js`, `productsSlice.js`).
 - **`src/utils`**: A collection of helper functions and utilities that can be used throughout the application.
 - **`src/styles`**: Contains global CSS files and styling-related configurations.
+
+### Product Filtering and Sorting
+
+The `Products.jsx` component is responsible for handling the filtering and sorting of products. The filtering and sorting logic is implemented in the following order:
+
+1.  **Search:** The product list is first filtered based on the search term entered by the user. The search is case-insensitive and matches partial strings in the product name.
+2.  **Filtering:** The product list is then filtered based on the selected category, minimum total value, and maximum total value.
+3.  **Sorting:** The filtered product list is then sorted based on the selected sorting option (price ascending or descending).
+4.  **Pagination:** Finally, the sorted and filtered product list is paginated.
 
 ### Routing
 

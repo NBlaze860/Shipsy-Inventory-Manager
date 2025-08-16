@@ -36,9 +36,11 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 9;
   const [filters, setFilters] = useState({
+    search: "",
     category: "all",
     minValue: "",
     maxValue: "",
+    sortBy: "default",
   });
 
   const handleFilterChange = (newFilters) => {
@@ -46,12 +48,23 @@ const Products = () => {
     setCurrentPage(1);
   };
 
-  const filteredProducts = productList.filter((product) => {
+  const sortedProducts = [...productList].sort((a, b) => {
+    if (filters.sortBy === 'price-asc') {
+      return (a.unitPrice || 0) - (b.unitPrice || 0);
+    }
+    if (filters.sortBy === 'price-desc') {
+      return (b.unitPrice || 0) - (a.unitPrice || 0);
+    }
+    return 0;
+  });
+
+  const filteredProducts = sortedProducts.filter((product) => {
     const totalValue = product.quantity * product.unitPrice;
+    const searchMatch = product.name.toLowerCase().startsWith(filters.search.toLowerCase());
     const categoryMatch = filters.category === "all" || product.category === filters.category;
     const minMatch = filters.minValue === "" || totalValue >= parseFloat(filters.minValue);
     const maxMatch = filters.maxValue === "" || totalValue <= parseFloat(filters.maxValue);
-    return categoryMatch && minMatch && maxMatch;
+    return searchMatch && categoryMatch && minMatch && maxMatch;
   });
 
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);

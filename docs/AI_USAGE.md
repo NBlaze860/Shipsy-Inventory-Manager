@@ -474,3 +474,33 @@
     - **Reasoning:** The goal was to improve the usability of the Products page by allowing users to filter the product list based on specific criteria. The changes provide a more powerful and intuitive interface for managing a large number of products.
     - **Verification method:** The user can manually review the code changes in the created and modified files and the updates to the documentation files.
     - **Related Commit:** Pending user commit
+
+19. **Date:** 2025-08-16 06:00 PM
+
+    - **Context:** The user wanted to add a sorting option to the Products page.
+    - **Exact Prompt:** The user provided instructions via the `GEMINI.md` file to add a sorting dropdown to the `FilterControls.jsx` component and implement the sorting logic in the `Products.jsx` component. The user also requested to update the documentation files.
+    - **AI Output Summary:** The AI successfully added the sorting functionality to the Products page. It updated the `FilterControls.jsx` component to include the sorting dropdown, and it updated the `Products.jsx` component to handle the sorting logic. It also updated the `DESIGN.md`, `ARCHITECTURE.md`, and `AI_USAGE.md` files to reflect these changes.
+    - **Applied Changes:**
+      - `frontend/src/components/products/FilterControls.jsx`: Added the sorting dropdown.
+      - `frontend/src/pages/Products.jsx`: Added the sorting logic.
+      - `docs/DESIGN.md`: Added a new section explaining the sorting design decision.
+      - `docs/ARCHITECTURE.md`: Updated the frontend architecture to reflect the changes.
+      - `docs/AI_USAGE.md`: Added this entry to log the interaction.
+    - **Reasoning:** The goal was to enhance the usability of the Products page by allowing users to sort the product list by price. The changes provide a more powerful and intuitive interface for managing a large number of products.
+    - **Verification method:** The user can manually review the code changes in the created and modified files and the updates to the documentation files.
+    - **Related Commit:** Pending user commit
+
+20. **Date:** 2025-08-16 07:00 PM
+
+    - **Context:** The user wanted to add a real-time search bar to the Products page.
+    - **Exact Prompt:** The user provided instructions via the `GEMINI.md` file to add a search input field to the `FilterControls.jsx` component and implement the search logic in the `Products.jsx` component. The user also requested to update the documentation files.
+    - **AI Output Summary:** The AI successfully added the real-time search functionality to the Products page. It updated the `FilterControls.jsx` component to include the search input field, and it updated the `Products.jsx` component to handle the search logic. It also updated the `DESIGN.md`, `ARCHITECTURE.md`, and `AI_USAGE.md` files to reflect these changes.
+    - **Applied Changes:**
+      - `frontend/src/components/products/FilterControls.jsx`: Added the search input field.
+      - `frontend/src/pages/Products.jsx`: Added the search logic.
+      - `docs/DESIGN.md`: Added a new section explaining the real-time search design decision.
+      - `docs/ARCHITECTURE.md`: Updated the frontend architecture to reflect the changes.
+      - `docs/AI_USAGE.md`: Added this entry to log the interaction.
+    - **Reasoning:** The goal was to provide a more intuitive and efficient way to find products. The real-time search functionality provides users with immediate feedback as they type, making it faster and easier to find specific products.
+    - **Verification method:** The user can manually review the code changes in the created and modified files and the updates to the documentation files.
+    - **Related Commit:** Pending user commit

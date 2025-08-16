@@ -231,3 +231,27 @@ These functions are implemented in `AuthService.js` with corresponding controlle
 - **Styling:** The filter controls are styled to match the existing form elements in the application, ensuring a consistent look and feel.
 
 **Reasoning:** The addition of filtering functionality provides users with a powerful tool to quickly find the products they are looking for. The reusable `FilterControls` component promotes code reuse and separation of concerns. The decision to reset the pagination on filter changes ensures a better user experience by preventing users from being on a page that no longer exists after filtering.
+
+## Product Sorting
+
+**Context:** To further enhance the usability of the Products page, users need the ability to sort the product list based on specific criteria.
+
+**Decision:** A sorting dropdown has been added to the filter bar, allowing users to sort products by unit price in ascending or descending order. The default option is to not sort the products.
+
+- **Controls:** The sorting control is a dropdown with options for "Default", "Price: Low to High", and "Price: High to Low".
+- **Logic:** The sorting logic is implemented in the `Products.jsx` component. It uses the `sort` method to apply the selected sorting to the filtered product list. The sorting is applied after filtering but before pagination.
+- **Styling:** The sorting dropdown is styled to match the existing filter controls, ensuring a consistent look and feel.
+
+**Reasoning:** The addition of sorting functionality provides users with another powerful tool to organize and find the products they are looking for. The implementation is consistent with the existing filtering and pagination logic, ensuring a seamless user experience.
+
+## Real-time Product Search
+
+**Context:** To provide an even more intuitive and efficient way to find products, a real-time search bar was needed in the filter controls.
+
+**Decision:** A search input field has been added to the `FilterControls` component, allowing users to search for products by name in real-time. The search is case-insensitive and matches partial strings.
+
+- **Controls:** The search control is a text input field with a placeholder to guide the user.
+- **Logic:** The search logic is implemented in the `Products.jsx` component. It uses the `filter` method with `includes` to perform a case-insensitive search on the product names. The search is applied before any other filters.
+- **Styling:** The search input is styled to match the other filter controls, and it is placed as the first element in the filter bar.
+
+**Reasoning:** The real-time search functionality provides users with immediate feedback as they type, making it faster and easier to find specific products. The case-insensitive and partial matching capabilities make the search more user-friendly. Placing the search bar as the first element in the filter bar follows a common and intuitive design pattern.

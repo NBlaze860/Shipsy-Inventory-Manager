@@ -109,3 +109,6 @@
 
 ## Commit 20 :
 ![alt text](./commit_images/image17.png)
+
+## Commit 21 :
+![alt text](./commit_images/image18.png)
