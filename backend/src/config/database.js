@@ -19,14 +19,25 @@ import mongoose from "mongoose";
  */
 export const connectdb = async () => {
   try {
+    // Configure mongoose options for better production performance
+    const options = {
+      serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+      socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+      bufferMaxEntries: 0, // Disable mongoose buffering
+      maxPoolSize: 10, // Maintain up to 10 socket connections
+    };
+
     // Attempt to connect to MongoDB using connection string from environment
-    const conn = await mongoose.connect(process.env.MONGODB_URI);
-    console.log("Database connected successfully");
+    const conn = await mongoose.connect(process.env.MONGODB_URI, options);
+    console.log(`Database connected successfully to: ${conn.connection.host}`);
   } catch (error) {
     // Log connection errors for debugging purposes
     console.log("Database connection error: " + error);
     
-    // In production, you might want to exit the process or implement retry logic
-    // process.exit(1);
+    // In production, exit the process if database connection fails
+    if (process.env.NODE_ENV === "production") {
+      console.log("Exiting process due to database connection failure");
+      process.exit(1);
+    }
   }
 };
