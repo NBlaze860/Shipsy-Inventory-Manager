@@ -1,11 +1,26 @@
+/**
+ * Products Redux Slice
+ * 
+ * Manages product inventory state including CRUD operations, loading states,
+ * and error handling. Handles async operations for product management with
+ * proper state transitions and error management.
+ */
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../lib/axios";
 
-// Initial state for the products slice
+/**
+ * Initial Products State
+ * 
+ * Default state structure for products slice:
+ * - products: Array of user's product inventory
+ * - loading: Loading state for async operations
+ * - error: Error messages from failed operations
+ */
 const initialState = {
-  products: [],
-  loading: false,
-  error: null,
+  products: [],    // Array of product objects
+  loading: false,  // Loading state for product operations
+  error: null,     // Error messages from product operation failures
 };
 
 // Async thunk for getting all products

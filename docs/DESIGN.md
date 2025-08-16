@@ -114,20 +114,6 @@ These functions are implemented in `AuthService.js` with corresponding controlle
 
 **Reasoning:** This feature enhances user interaction with their inventory data through conversational AI. By restricting access to user-specific products and limiting responses to product-related queries, it maintains security and relevance. The integration with existing authentication ensures data privacy while providing a modern, intuitive interface for inventory management.
 
-## AI-Powered Product Chatbot
-
-**Context:** Users need an intelligent way to query and interact with their product data using natural language. A chatbot interface would improve user experience and provide quick access to product information.
-
-**Decision:** A new analytics endpoint `POST /analytics/chatbot` has been implemented with the following features:
-- Uses Gemini LLM for natural language processing
-- Restricts responses to product-related queries only
-- Filters product data by authenticated user ID for privacy
-- Returns concise, contextual responses based on user's product inventory
-- Implements proper authentication middleware integration
-- Provides fallback response for non-product-related queries
-
-**Reasoning:** This feature enhances user interaction with their inventory data through conversational AI. By restricting access to user-specific products and limiting responses to product-related queries, it maintains security and relevance. The integration with existing authentication ensures data privacy while providing a modern, intuitive interface for inventory management.
-
 ## Frontend Project Structure
 
 **Context:** A well-organized frontend project structure is essential for building a scalable and maintainable React application. The structure should provide clear separation of concerns and make it easy for developers to locate and work on different parts of the application.

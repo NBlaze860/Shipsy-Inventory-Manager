@@ -1,3 +1,11 @@
+/**
+ * AI Chat Widget Component
+ * 
+ * Interactive chat interface for AI-powered product queries. Provides a floating
+ * chat widget that allows users to ask natural language questions about their
+ * product inventory and receive intelligent responses from the AI assistant.
+ */
+
 import { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -9,46 +17,83 @@ import {
   clearError,
 } from '../../store/analyticsSlice';
 
+/**
+ * ChatWidget Component
+ * 
+ * Floating chat interface that provides AI-powered assistance for product queries.
+ * Features include message history, auto-scroll, error handling, and responsive design.
+ * 
+ * @component
+ * @returns {JSX.Element} Chat widget with toggle button or full chat interface
+ */
 const ChatWidget = () => {
   const dispatch = useDispatch();
+  
+  // Extract chat state from Redux store
   const { messages, loading, error, isOpen } = useSelector((state) => state.analytics);
+  
+  // Local state for message input
   const [inputMessage, setInputMessage] = useState('');
+  
+  // Reference for auto-scrolling to latest messages
   const messagesEndRef = useRef(null);
 
-  // Auto-scroll to latest message
+  /**
+   * Auto-scroll to Latest Message
+   * 
+   * Smoothly scrolls the chat container to show the most recent message.
+   * Enhances user experience by keeping latest content visible.
+   */
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Auto-scroll whenever new messages are added
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
-  // Clear error when component mounts or chat opens
+  // Clear any existing errors when chat is opened
   useEffect(() => {
     if (isOpen && error) {
       dispatch(clearError());
     }
   }, [isOpen, error, dispatch]);
 
+  /**
+   * Handle Message Submission
+   * 
+   * Processes user message submission, adds message to chat history,
+   * and sends to AI backend for processing. Handles errors gracefully.
+   * 
+   * @param {Event} e - Form submission event
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = inputMessage.trim();
     
+    // Prevent empty message submission
     if (!message) return;
 
-    // Add user message to state
+    // Add user message to chat immediately for responsive UI
     dispatch(addUserMessage(message));
-    setInputMessage('');
+    setInputMessage(''); // Clear input field
 
-    // Send message to backend
+    // Send message to AI backend for processing
     try {
       await dispatch(sendChatMessage(message)).unwrap();
     } catch (error) {
       console.error('Failed to send message:', error);
+      // Error handling is managed by Redux slice
     }
   };
 
+  /**
+   * Handle Chat History Clear
+   * 
+   * Clears all messages from the chat history, providing a fresh start
+   * for new conversations.
+   */
   const handleClearChat = () => {
     dispatch(clearMessages());
   };

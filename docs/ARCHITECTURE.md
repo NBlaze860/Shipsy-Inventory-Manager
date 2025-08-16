@@ -24,7 +24,6 @@ The backend follows a layered architecture to ensure a clear separation of conce
   - `Product.js`: Product inventory model with automatic value calculations and user references.
 - **Middleware (`src/middleware`):** Provides a way to execute code before a request is handled by the controllers. This is used for tasks such as authentication, validation, and error handling.
 - **Config (`src/config`):** Contains configuration files for the database, JWT, and other services.
-- **Utils (`src/utils`):** Contains utility functions that can be used throughout the application.
 
 ## Frontend Architecture
 
