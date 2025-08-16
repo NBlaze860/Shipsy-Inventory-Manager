@@ -1,9 +1,9 @@
 /**
  * Main Express Server Configuration
- * 
+ *
  * This file sets up the Express.js server with all necessary middleware,
  * routes, and database connections for the Product Management System.
- * 
+ *
  * Features:
  * - Environment variable configuration
  * - CORS setup for frontend communication
@@ -19,7 +19,7 @@ import { fileURLToPath } from "url";
 
 // ES modules compatibility: Get current directory path
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.resolve();
+const __dirname = path.resolve(path.dirname(__filename));
 
 // Load environment variables before any other imports to ensure availability
 dotenv.config({ path: path.join(__dirname, ".env") });
@@ -54,13 +54,13 @@ app.use(express.json());
 app.use(cookieParser());
 
 // API route mounting - organize endpoints by feature
-app.use("/api/products", ProductRoutes);    // Product CRUD operations
-app.use("/api/auth/", AuthRoutes);          // User authentication endpoints
+app.use("/api/products", ProductRoutes); // Product CRUD operations
+app.use("/api/auth/", AuthRoutes); // User authentication endpoints
 app.use("/api/analytics", AnalyticsRoutes); // AI chatbot analytics endpoints
 
 // Health check endpoint - basic server status verification
 
-if(process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
