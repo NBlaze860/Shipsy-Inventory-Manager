@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: shipsy-inventory-manager
-    env: node
-    buildCommand: npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend
-    startCommand: cd backend && node server.js
-    envVars:
-      - key: NODE_ENV
-        value: production
