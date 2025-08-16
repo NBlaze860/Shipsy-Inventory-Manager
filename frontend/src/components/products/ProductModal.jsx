@@ -3,7 +3,7 @@ import React from 'react';
 const ProductModal = ({ isOpen, onClose, isEditMode, formData, onChange, onSubmit }) => {
   if (!isOpen) return null;
 
-  const totalValue = (formData.quantity * formData.unitPrice).toFixed(2);
+  const totalValue = ((formData.quantity || 0) * (formData.unitPrice || 0)).toFixed(2);
 
   return (
     <div className="fixed z-50 inset-0 overflow-y-auto">
@@ -19,15 +19,15 @@ const ProductModal = ({ isOpen, onClose, isEditMode, formData, onChange, onSubmi
                         <div className="mt-4 space-y-4">
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                            <input type="text" name="name" id="name" value={formData.name} onChange={onChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                            <input type="text" name="name" id="name" value={formData.name || ''} onChange={onChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                         </div>
                         <div>
                             <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-                            <textarea name="description" id="description" value={formData.description} onChange={onChange} rows="3" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                            <textarea name="description" id="description" value={formData.description || ''} onChange={onChange} rows="3" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
                         </div>
                         <div>
                             <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
-                            <select name="category" id="category" value={formData.category} onChange={onChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <select name="category" id="category" value={formData.category || 'electronics'} onChange={onChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                 <option value="electronics">Electronics</option>
                                 <option value="clothing">Clothing</option>
                                 <option value="food">Food</option>
@@ -38,11 +38,11 @@ const ProductModal = ({ isOpen, onClose, isEditMode, formData, onChange, onSubmi
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">Quantity</label>
-                                <input type="number" name="quantity" id="quantity" value={formData.quantity} onChange={onChange} required min="0" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                <input type="number" name="quantity" id="quantity" value={formData.quantity || 0} onChange={onChange} required min="0" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
                             <div>
                                 <label htmlFor="unitPrice" className="block text-sm font-medium text-gray-700">Unit Price</label>
-                                <input type="number" name="unitPrice" id="unitPrice" value={formData.unitPrice} onChange={onChange} required min="0" step="0.01" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                <input type="number" name="unitPrice" id="unitPrice" value={formData.unitPrice || 0} onChange={onChange} required min="0" step="0.01" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
                         </div>
                         <div>

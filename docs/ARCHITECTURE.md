@@ -63,6 +63,19 @@ The `authSlice.js` file is a key part of the frontend state management, responsi
   - `checkAuth`: Handles authentication verification by making a `GET` request to `/api/auth/check` for session persistence.
 - **Reducers:** The slice includes reducers to handle the pending, fulfilled, and rejected states of the async thunks, updating the state accordingly. The initial loading state is set to `true` to check authentication on app initialization.
 
+### Redux Products Slice
+
+The `productsSlice.js` file manages all product-related state and operations in the frontend application. It follows the same architectural patterns as the auth slice for consistency.
+
+- **State Shape:** The slice manages a `products` array, a `loading` boolean, and an `error` string/null.
+- **Async Thunks:**
+  - `getAllProducts`: Fetches all user products by making a `GET` request to `/api/products`.
+  - `getProductById`: Fetches a specific product by making a `GET` request to `/api/products/:id`.
+  - `createProduct`: Creates a new product by making a `POST` request to `/api/products`.
+  - `updateProduct`: Updates an existing product by making a `PUT` request to `/api/products/:id`.
+  - `deleteProduct`: Deletes a product by making a `DELETE` request to `/api/products/:id`.
+- **Reducers:** The slice includes reducers to handle the pending, fulfilled, and rejected states of all async thunks, with proper state updates for CRUD operations including optimistic updates for create, update, and delete operations.
+
 ### Authentication Flow
 
 The application implements session persistence using httpOnly JWT cookies:
