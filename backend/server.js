@@ -55,7 +55,7 @@ app.use(cookieParser());
 
 // API route mounting - organize endpoints by feature
 app.use("/api/products", ProductRoutes); // Product CRUD operations
-app.use("/api/auth/", AuthRoutes); // User authentication endpoints
+app.use("/api/auth", AuthRoutes); // User authentication endpoints
 app.use("/api/analytics", AnalyticsRoutes); // AI chatbot analytics endpoints
 
 // Health check endpoint - basic server status verification
