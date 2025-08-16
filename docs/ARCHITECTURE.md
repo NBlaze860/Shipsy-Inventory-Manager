@@ -36,6 +36,7 @@ The frontend is structured to support a scalable and maintainable React applicat
   - `ui/`: Basic, general-purpose UI elements like buttons, inputs, and modals.
   - `layout/`: Components that define the overall structure of the application, such as headers, footers, and sidebars.
   - `auth/`, `products/`, `analytics/`: Feature-specific components related to authentication, products, and analytics.
+  - `common/`: Components that are shared across multiple features, such as the `Pagination.jsx` component.
 - **`src/pages`**: Contains top-level components that represent the different pages of the application (e.g., `Login.jsx`, `Register.jsx`, `Products.jsx`). Each page component is responsible for composing the layout and components for a specific route.
 - **`src/store`**: Holds all the Redux-related code for state management.
   - `store.js`: The main Redux store configuration.

@@ -11,6 +11,7 @@ import {
 import { logout } from "../store/authSlice";
 import ProductList from "../components/products/ProductList";
 import ProductModal from "../components/products/ProductModal";
+import Pagination from "../components/common/Pagination";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,18 @@ const Products = () => {
     quantity: 0,
     unitPrice: 0,
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 9;
+
+  const totalPages = Math.ceil(productList.length / productsPerPage);
+  const paginatedProducts = productList.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   useEffect(() => {
     console.log("User authenticated:", user);
@@ -208,11 +221,16 @@ const Products = () => {
           <p>No products found. Add a new one to get started!</p>
         ) : (
           <ProductList
-            products={productList}
+            products={paginatedProducts}
             onEdit={handleEdit}
             onDelete={handleDelete}
           />
         )}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
 
       <ProductModal

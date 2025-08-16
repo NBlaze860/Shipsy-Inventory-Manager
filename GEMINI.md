@@ -1,58 +1,58 @@
-Create a Redux slice named "productsSlice" with the following specifications:
+Add Pagination to Products Page
 
-##### State
-- name: String (required)
-- description: String (default: "")
-- category: String (enum: ['electronics', 'clothing', 'food', 'books', 'other'], required)
-- quantity: Number (required, min: 0)
-- unitPrice: Number (required, min: 0)
-- isActive: Boolean (default: true)
-- totalValue: Number (calculated automatically as quantity * unitPrice)
+## Context
+You are working on a React application with Redux state management. The Products page currently displays all products in a grid layout using Tailwind CSS. The application uses a clean, professional design with gray/indigo color scheme.
 
-##### Reducers (with async thunks)
-1. Get All Products
-   - Method: GET
-   - URL: /api/products
-   - Auth: JWT token required
-   - No request body
-   - Return backend response
-   - Handle errors: 401 Unauthorized, 500 Server Error
+## Current Structure
+- **Products.jsx**: Main page component that fetches and displays products
+- **ProductList.jsx**: Component that renders products in a grid layout (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`)
+- **ProductCard.jsx**: Individual product card component with white background and rounded corners
+- **Redux Store**: Uses `productsSlice.js` for state management
 
-2. Get Product by ID
-   - Method: GET
-   - URL: /api/products/:id
-   - Auth: JWT token required
-   - Use product ID as parameter
-   - Return backend response
-   - Handle errors: 401 Unauthorized, 404 Not Found, 500 Server Error
+## Task
+Add pagination functionality to display only 9 products per page with a pagination bar positioned just below the product cards.
 
-3. Create Product
-   - Method: POST
-   - URL: /api/products
-   - Auth: JWT token required
-   - Request body fields: name (required), description (optional, default ""), category (required enum), quantity (required, min: 0), unitPrice (required, min: 0), isActive (optional, default true)
-   - Return backend response
-   - Handle errors: 400 Validation, 401 Unauthorized, 500 Server Error
+## Requirements
 
-4. Update Product
-   - Method: PUT
-   - URL: /api/products/:id
-   - Auth: JWT token required
-   - Request body: same as Create Product (all optional for update)
-   - Return updated product
-   - Handle errors: 400 Validation, 401 Unauthorized, 404 Not Found, 500 Server Error
+### Pagination Logic
+- Display exactly 9 products per page
+- Calculate total pages based on product count
+- Track current page in component state
+- Slice the products array based on current page
 
-5. Delete Product
-   - Method: DELETE
-   - URL: /api/products/:id
-   - Auth: JWT token required
-   - Return backend response with empty data object
-   - Handle errors: 401 Unauthorized, 404 Not Found, 500 Server Error
+### UI Design
+- Position pagination bar directly below the product grid
+- Match the existing design system (Tailwind CSS, gray/indigo theme)
+- Use clean, minimal pagination controls
+- Include: Previous button, page numbers, Next button
+- Disable Previous/Next buttons when appropriate
+- Highlight current page number
 
-##### Implementation Notes
-- Read Auth slice implementation first and follow the same style.
-- Keep the slice code simple, clean, organized, and professional.
-- Add self-explanatory comments above reducers and async thunks.
+### Implementation Guidelines
+1. **Keep code minimal and clean** - Only add necessary functionality
+2. **Maintain existing structure** - Don't modify ProductCard or ProductList components unnecessarily
+3. **Use React hooks** - useState for pagination state
+4. **Professional styling** - Match the existing button styles and color scheme
+5. **Responsive design** - Ensure pagination works on mobile devices
+
+### Specific Styling Requirements
+- Use similar button styling as existing "Add Product" and "Logout" buttons
+- Current page should be highlighted with indigo background
+- Inactive buttons should be grayed out
+- Maintain consistent spacing and alignment
+- Use hover effects for interactive elements
+
+### Code Organization
+- Add pagination logic to Products.jsx component
+- Create a simple, reusable pagination component if needed
+- Keep the implementation straightforward and maintainable
+
+## Expected Output
+Modify the existing files to add pagination functionality while maintaining the current design aesthetic and code quality standards. The pagination should feel like a natural part of the existing interface.
+
+## Files to Modify
+- `frontend/src/pages/Products.jsx` - Add pagination state and logic
+- Optionally create `frontend/src/components/common/Pagination.jsx` if you
 
 ##### UI Integration (Products Page)
 - On dashboard load => dispatch "Get All Products" and display the products
@@ -61,6 +61,16 @@ Create a Redux slice named "productsSlice" with the following specifications:
 - On delete => dispatch "Delete Product"
 - Ensure proper error handling and success notifications in the UI.
 
+
+---
+
+Update the /docs/DESIGN.md file for this project based on the changes we just discussed. Follow these rules:
+
+Keep the writing concise but professional.
+Use clear section headings for each decision.
+For every design choice, include: Context, Decision, and Reasoning.
+If this change modifies or replaces a previous decision, clearly note it.
+Maintain an organized, logical flow so that someone reading DESIGN.md alone can understand why each major decision was made.
 
 ---
 

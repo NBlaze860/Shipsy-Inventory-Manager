@@ -208,3 +208,14 @@ These functions are implemented in `AuthService.js` with corresponding controlle
 - **Empty State:** A message is displayed when the user has no products, guiding them to add their first product.
 
 **Reasoning:** This design provides a comprehensive and user-friendly interface for managing products. The consistent theme and layout create a cohesive user experience. The use of a modal for create/edit operations keeps the main page clean and focused. The responsive grid ensures that the page looks good on all devices. The empty state improves the user experience for new users.
+
+## Pagination for Products Page
+
+**Context:** The Products page previously displayed all products on a single page. As the number of products grows, this can lead to performance issues and a cluttered user interface.
+
+**Decision:** Pagination has been added to the Products page to display a limited number of products per page (9). A reusable `Pagination` component has been created with the following features:
+- **Controls:** Includes "Previous" and "Next" buttons, as well as page numbers.
+- **Styling:** Matches the existing design system, with the current page highlighted in indigo.
+- **Logic:** The pagination logic is handled in the `Products.jsx` component, which slices the product list based on the current page.
+
+**Reasoning:** Pagination improves the user experience and performance of the Products page by breaking down a large number of products into smaller, more manageable chunks. The reusable `Pagination` component promotes code reuse and maintains a consistent look and feel across the application. The styling is consistent with the existing design system, ensuring a seamless user experience.
