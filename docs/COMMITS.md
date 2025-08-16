@@ -112,3 +112,6 @@
 
 ## Commit 21 :
 ![alt text](./commit_images/image18.png)
+
+## Commit 22 :
+![alt text](./commit_images/image19.png)

@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Products from "./pages/Products";
+import ChatWidget from "./components/analytics/ChatWidget";
 import { checkAuth } from "./store/authSlice";
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         />
         <Route path="/" element={<Navigate to="/products" />} />
       </Routes>
+      {user && <ChatWidget />}
     </Router>
   );
 }

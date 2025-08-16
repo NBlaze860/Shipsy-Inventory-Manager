@@ -1,16 +1,23 @@
 // server.js
-import express from "express";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Get current directory for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load environment variables first, before any other imports
+dotenv.config({ path: path.join(__dirname, ".env") });
+
+import express from "express";
 import cookieParser from "cookie-parser";
 import { connectdb } from "./src/config/database.js";
 import ProductRoutes from "./src/routes/products.js";
 import AuthRoutes from "./src/routes/auth.js";
 import AnalyticsRoutes from "./src/routes/analytics.js";
 import cors from "cors";
-
 const app = express();
-
-dotenv.config();
 
 const PORT = process.env.PORT || 8000;
 

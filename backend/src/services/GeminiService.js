@@ -2,6 +2,13 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 class GeminiService {
   constructor() {
+    console.log("GeminiService initialized");
+    console.log("GEMINI_API_KEY:", process.env.GEMINI_API_KEY ? "Present" : "Missing");
+    
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error("GEMINI_API_KEY environment variable is not set");
+    }
+    
     this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     // Simple in-memory conversation storage
