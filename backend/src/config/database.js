@@ -23,7 +23,6 @@ export const connectdb = async () => {
     const options = {
       serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
       socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-      bufferMaxEntries: 0, // Disable mongoose buffering
       maxPoolSize: 10, // Maintain up to 10 socket connections
     };
 
